@@ -44,6 +44,25 @@ class Main_Activity : AppCompatActivity() {
             startActivity(intent)
 
         }
+
+        btnLogin.setOnClickListener{
+
+            var mobilenumber = etMobileNumber.text.toString()
+            var password = etPassword.text.toString()
+
+            if((mobilenumber==validmob)&&(password==validpass))
+            {
+                val intent=Intent(this@Main_Activity,Login_Success::class.java)
+                startActivity(intent)
+            }
+
+            else
+            {
+                Toast.makeText(this@Main_Activity,"Incorrect Credentials",Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
     }
 }
 

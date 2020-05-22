@@ -14,4 +14,5 @@
     <string name="register2">Register</string>
     <string name="enter">Enter your registered mobile number and email below</string>
     <string name="next">Next</string>
+    <string name="welcome">Welcome to Food Runner</string>
 </resources>
