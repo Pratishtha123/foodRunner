@@ -27,6 +27,44 @@
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="20dp"/>
 
+    <EditText
+        android:id="@+id/etMobileNumber3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtInstruction"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="20dp"
+        android:padding="6dp"
+        android:hint="@string/mobile_number"
+        android:inputType="phone"
+        android:maxLength="10"
+        android:maxLines="1"/>
+
+    <EditText
+        android:id="@+id/etMailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etMobileNumber3"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="20dp"
+        android:padding="6dp"
+        android:hint="@string/email_address"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"/>
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etMailAddress"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="30dp"
+        android:background="#b71c1c"
+        android:padding="6dp"
+        android:text="@string/next"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>
