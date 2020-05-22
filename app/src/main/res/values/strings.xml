@@ -5,4 +5,12 @@
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="food_runner">Food Runner</string>
+    <string name="name">Name (Min. 3 characters)</string>
+    <string name="email_address">Email Address</string>
+    <string name="mobile">Mobile Number (10 digits)</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="password_min">Password (Min. 4 characters)</string>
+    <string name="sign_up">Don\'t have an account?Sign up now</string>
+    <string name="register2">Register</string>
+    <string name="enter">Enter your registered mobile number and email below</string>
 </resources>
