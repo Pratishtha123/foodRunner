@@ -59,10 +59,9 @@ class Main_Activity : AppCompatActivity() {
             else
             {
                 Toast.makeText(this@Main_Activity,"Incorrect Credentials",Toast.LENGTH_LONG).show()
+
             }
         }
-    }
-
     }
 }
 
