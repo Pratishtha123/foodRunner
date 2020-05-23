@@ -1,5 +1,6 @@
 package com.pratishtha.foodrunner
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -29,7 +30,6 @@ class Forgot_Activity : AppCompatActivity() {
         btnNext.setOnClickListener{
 
             Toast.makeText(this@Forgot_Activity,"Refer to your Mail id to change Password",Toast.LENGTH_LONG).show()
-
         }
 
 

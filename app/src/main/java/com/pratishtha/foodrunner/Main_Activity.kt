@@ -1,6 +1,8 @@
 package com.pratishtha.foodrunner
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -19,11 +21,25 @@ class Main_Activity : AppCompatActivity() {
     val validmob ="1111111111"
     val validpass="11111"
 
-
+    lateinit var sharedpreferences:SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        sharedpreferences=getSharedPreferences(getString(R.string.preference_file_name),Context.MODE_PRIVATE)
+        val isLoggedIn=sharedpreferences.getBoolean("isLoggedIn",false)
+
         setContentView(R.layout.activity_main)
+
+        if(isLoggedIn)
+        {
+            val intent=Intent(this@Main_Activity,Login_Success::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+
+
 
         txtForgot=findViewById(R.id.txtForgot)
         btnLogin=findViewById(R.id.btnLogin)
@@ -53,6 +69,8 @@ class Main_Activity : AppCompatActivity() {
             if((mobilenumber==validmob)&&(password==validpass))
             {
                 val intent=Intent(this@Main_Activity,Login_Success::class.java)
+                sharedpreferences.edit().putBoolean("isLoggedIn",true).apply()
+
                 startActivity(intent)
             }
 
@@ -63,5 +81,15 @@ class Main_Activity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onPause() {
+        super.onPause()
+
+        var Login=sharedpreferences.getBoolean("isLoggedIn",false)
+         if(Login)
+             finish()
+
+    }
+
 }
 
