@@ -21,6 +21,8 @@ class Main_Activity : AppCompatActivity() {
     val validmob ="1111111111"
     val validpass="11111"
 
+    var mobilePattern = "[0-9]{10}"
+
     lateinit var sharedpreferences:SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +68,14 @@ class Main_Activity : AppCompatActivity() {
             var mobilenumber = etMobileNumber.text.toString()
             var password = etPassword.text.toString()
 
-            if((mobilenumber==validmob)&&(password==validpass))
+            if(etMobileNumber.text.toString().isEmpty())
+                Toast.makeText(this@Main_Activity,"Enter Mobile Number",Toast.LENGTH_LONG).show()
+            else if(etPassword.text.toString().isEmpty())
+                Toast.makeText(this@Main_Activity,"Enter Password",Toast.LENGTH_LONG).show()
+            else if(!etMobileNumber.text.toString().trim().matches(mobilePattern.toRegex()))
+                Toast.makeText(this@Main_Activity,"Enter a valid Mobile number",Toast.LENGTH_LONG).show()
+
+            else if((mobilenumber==validmob)&&(password==validpass))
             {
                 val intent=Intent(this@Main_Activity,Login_Success::class.java)
                 sharedpreferences.edit().putBoolean("isLoggedIn",true).apply()

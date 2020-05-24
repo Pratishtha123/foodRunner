@@ -16,4 +16,5 @@
     <string name="next">Next</string>
     <string name="welcome">Welcome to Food Runner</string>
     <string name="preference_file_name">Food_App</string>
+    <string name="welcome1">Welcome !</string>
 </resources>
