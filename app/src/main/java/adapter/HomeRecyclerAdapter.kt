@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.pratishtha.foodrunner.R
 import model.Restaurant
@@ -42,5 +43,9 @@ class HomeRecyclerAdapter(val context:Context,val itemList:ArrayList<Restaurant>
         holder.txtRating.text=restaurant.restaurantRating
         holder.txtPrice.text=restaurant.restaurantPrice
         holder.imgRestaurantImage.setImageResource(restaurant.restaurantImage)
+
+        holder.rlContent.setOnClickListener{
+            Toast.makeText(context,"Clicked on ${holder.txtRestaurantName.text}",Toast.LENGTH_SHORT).show()
+        }
     }
 }
