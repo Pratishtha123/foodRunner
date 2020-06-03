@@ -1,9 +1,9 @@
-package com.pratishtha.foodrunner
+package activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import org.w3c.dom.Text
+import com.pratishtha.foodrunner.R
 
 class Show_Details : AppCompatActivity() {
 
@@ -20,7 +20,7 @@ class Show_Details : AppCompatActivity() {
 
         txtName=findViewById(R.id.txtName)
         txtEmail_add=findViewById(R.id.txtEmail_add)
-        txtMobileNumber4=findViewById(R.id. txtMobileNumber4)
+        txtMobileNumber4=findViewById(R.id.txtMobileNumber4)
         txtAddress1=findViewById(R.id.txtAddress1)
 
         if(intent!=null)

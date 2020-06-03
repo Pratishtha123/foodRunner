@@ -1,4 +1,4 @@
-package com.pratishtha.foodrunner
+package activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +10,13 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import fragment.LogoutFragment
+import fragment.OrderHistoryFragment
+import fragment.ProfileFragment
+import com.pratishtha.foodrunner.R
+import fragment.FaqFragment
+import fragment.FavouriteFragment
+import fragment.HomeFragment
 
 class Main2_Activity : AppCompatActivity() {
 
@@ -18,6 +25,7 @@ class Main2_Activity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
     lateinit var frameLayout: FrameLayout
     lateinit var navigationView: NavigationView
+
 
     var previousMenuItem:MenuItem?=null
 
@@ -36,7 +44,10 @@ class Main2_Activity : AppCompatActivity() {
 
         openHome()
 
-        val actionBarDrawerToggle=ActionBarDrawerToggle(this@Main2_Activity,drawerLayout,R.string.open_drawer,R.string.close_drawer)
+        val actionBarDrawerToggle=ActionBarDrawerToggle(this@Main2_Activity,drawerLayout,
+            R.string.open_drawer,
+            R.string.close_drawer
+        )
         drawerLayout.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
 
@@ -52,38 +63,56 @@ class Main2_Activity : AppCompatActivity() {
 
             when(it.itemId)
             {
-                R.id.home->{
-                    supportFragmentManager.beginTransaction().replace(R.id.frameLayout,HomeFragment()).commit()
+                R.id.home ->{
+                    supportFragmentManager.beginTransaction().replace(
+                        R.id.frameLayout,
+                        HomeFragment()
+                    ).commit()
                     drawerLayout.closeDrawers()
                     supportActionBar?.title="All Restaurants"
                 }
 
-                R.id.profile->{
-                    supportFragmentManager.beginTransaction().replace(R.id.frameLayout,ProfileFragment()).commit()
+                R.id.profile ->{
+                    supportFragmentManager.beginTransaction().replace(
+                        R.id.frameLayout,
+                        ProfileFragment()
+                    ).commit()
                     drawerLayout.closeDrawers()
                     supportActionBar?.title="Profile"
                 }
 
-                R.id.favourites->{
-                    supportFragmentManager.beginTransaction().replace(R.id.frameLayout,FavouriteFragment()).commit()
+                R.id.favourites ->{
+                    supportFragmentManager.beginTransaction().replace(
+                        R.id.frameLayout,
+                        FavouriteFragment()
+                    ).commit()
                     drawerLayout.closeDrawers()
                     supportActionBar?.title="Favourite Restaturants"
                 }
 
-                R.id.orderHistory->{
-                    supportFragmentManager.beginTransaction().replace(R.id.frameLayout,OrderHistoryFragment()).commit()
+                R.id.orderHistory ->{
+                    supportFragmentManager.beginTransaction().replace(
+                        R.id.frameLayout,
+                        OrderHistoryFragment()
+                    ).commit()
                     drawerLayout.closeDrawers()
                     supportActionBar?.title="Order History"
                 }
 
-                R.id.faq->{
-                    supportFragmentManager.beginTransaction().replace(R.id.frameLayout,FaqFragment()).commit()
+                R.id.faq ->{
+                    supportFragmentManager.beginTransaction().replace(
+                        R.id.frameLayout,
+                        FaqFragment()
+                    ).commit()
                     drawerLayout.closeDrawers()
                     supportActionBar?.title="FAQs"
                 }
 
-                R.id.logout->{
-                    supportFragmentManager.beginTransaction().replace(R.id.frameLayout,LogoutFragment()).commit()
+                R.id.logout ->{
+                    supportFragmentManager.beginTransaction().replace(
+                        R.id.frameLayout,
+                        LogoutFragment()
+                    ).commit()
                     drawerLayout.closeDrawers()
                     supportActionBar?.title="LogOut"
                 }
@@ -122,7 +151,7 @@ class Main2_Activity : AppCompatActivity() {
         val frag=supportFragmentManager.findFragmentById(R.id.frameLayout)
         when(frag){
 
-            !is HomeFragment-> openHome()
+            !is HomeFragment -> openHome()
             else->super.onBackPressed()
 
         }

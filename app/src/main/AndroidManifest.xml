@@ -9,15 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".Main2_Activity" >
+        <activity android:name="activity.Main2_Activity" >
         </activity>
-        <activity android:name=".Show_Details" />
+        <activity android:name="activity.Show_Details" />
         <activity android:name=".Login_Success" />
-        <activity android:name=".Forgot_Activity" />
+        <activity android:name="activity.Forgot_Activity" />
         <activity android:name=".Register2" />
-        <activity android:name=".Register_Activity" />
-        <activity android:name=".Main_Activity" />
-        <activity android:name=".Splash_Activity" >
+        <activity android:name="activity.Register_Activity" />
+        <activity android:name="activity.Main_Activity" />
+        <activity android:name="activity.Splash_Activity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

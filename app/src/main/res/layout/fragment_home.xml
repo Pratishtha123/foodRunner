@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context="fragment.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="Home" />
+        android:id="@+id/recyclerView"
+        android:padding="5dp"/>
+
+
 
 </RelativeLayout>

@@ -28,4 +28,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="restaurant_name">Restaurant Name</string>
+    <string name="_4_5">4.5</string>
+    <string name="_299">299/person</string>
 </resources>

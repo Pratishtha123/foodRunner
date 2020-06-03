@@ -1,4 +1,4 @@
-package com.pratishtha.foodrunner
+package activity
 
 import android.content.Context
 import android.content.Intent
@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.pratishtha.foodrunner.R
 
 class Main_Activity : AppCompatActivity() {
 
@@ -35,7 +36,7 @@ class Main_Activity : AppCompatActivity() {
 
         if(isLoggedIn)
         {
-            val intent=Intent(this@Main_Activity,Main2_Activity::class.java)
+            val intent=Intent(this@Main_Activity, Main2_Activity::class.java)
             startActivity(intent)
             finish()
         }
@@ -58,7 +59,7 @@ class Main_Activity : AppCompatActivity() {
 
         txtForgot.setOnClickListener{
 
-            val intent=Intent(this@Main_Activity,Forgot_Activity::class.java)
+            val intent=Intent(this@Main_Activity, Forgot_Activity::class.java)
             startActivity(intent)
 
         }
@@ -77,7 +78,7 @@ class Main_Activity : AppCompatActivity() {
 
             else if((mobilenumber==validmob)&&(password==validpass))
             {
-                val intent=Intent(this@Main_Activity,Main2_Activity::class.java)
+                val intent=Intent(this@Main_Activity, Main2_Activity::class.java)
                 sharedpreferences.edit().putBoolean("isLoggedIn",true).apply()
 
                 startActivity(intent)

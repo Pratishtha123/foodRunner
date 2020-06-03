@@ -1,5 +1,6 @@
 package com.pratishtha.foodrunner
 
+import activity.Main2_Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
