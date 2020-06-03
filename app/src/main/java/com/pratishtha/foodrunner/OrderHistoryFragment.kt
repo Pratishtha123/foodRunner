@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 
-class OrderHistory : Fragment() {
+class OrderHistoryFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

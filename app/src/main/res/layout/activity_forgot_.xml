@@ -50,7 +50,7 @@
         android:padding="6dp"
         android:hint="@string/email_address"
         android:inputType="textEmailAddress"
-        android:maxLines="1"/>
+        android:maxLines="1" />
 
     <Button
         android:id="@+id/btnNext"
