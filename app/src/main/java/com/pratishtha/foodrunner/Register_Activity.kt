@@ -68,4 +68,9 @@ class Register_Activity : AppCompatActivity() {
         }
 
     }
+
+    override fun onPause() {
+        super.onPause()
+        finish()
+    }
 }

@@ -35,7 +35,7 @@ class Main_Activity : AppCompatActivity() {
 
         if(isLoggedIn)
         {
-            val intent=Intent(this@Main_Activity,Login_Success::class.java)
+            val intent=Intent(this@Main_Activity,Main2_Activity::class.java)
             startActivity(intent)
             finish()
         }
@@ -77,7 +77,7 @@ class Main_Activity : AppCompatActivity() {
 
             else if((mobilenumber==validmob)&&(password==validpass))
             {
-                val intent=Intent(this@Main_Activity,Login_Success::class.java)
+                val intent=Intent(this@Main_Activity,Main2_Activity::class.java)
                 sharedpreferences.edit().putBoolean("isLoggedIn",true).apply()
 
                 startActivity(intent)

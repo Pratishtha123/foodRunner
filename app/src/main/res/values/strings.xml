@@ -17,4 +17,12 @@
     <string name="welcome">Welcome to Food Runner</string>
     <string name="preference_file_name">Food_App</string>
     <string name="welcome1">Welcome !</string>
+    <string name="home">Home</string>
+    <string name="my_profile">My Profile</string>
+    <string name="favourite_restaurants">Favourite Restaurants</string>
+    <string name="order_history">Order History</string>
+    <string name="faqs">FAQs</string>
+    <string name="log_out">Log out</string>
+    <string name="open_drawer">Open Drawer</string>
+    <string name="close_drawer">Close Drawer</string>
 </resources>
