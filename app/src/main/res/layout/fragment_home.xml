@@ -11,6 +11,16 @@
         android:id="@+id/recyclerView"
         android:padding="5dp"/>
 
+    <Button
+        android:id="@+id/btnCheckInternet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Check Internet"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:background="#b71c1c"/>
 
 
 </RelativeLayout>

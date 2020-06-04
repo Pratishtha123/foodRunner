@@ -1,22 +1,27 @@
 package fragment
 
 import adapter.HomeRecyclerAdapter
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pratishtha.foodrunner.R
 import model.Restaurant
+import util.ConnectionManager
 
 
 class HomeFragment : Fragment() {
 
     lateinit var recyclerView:RecyclerView
     lateinit var layoutManager:RecyclerView.LayoutManager
+
+    lateinit var btnCheckInternet:Button
 
     val restaurantInfoList = arrayListOf<Restaurant>(
 
@@ -49,6 +54,38 @@ class HomeFragment : Fragment() {
         recyclerAdapter= HomeRecyclerAdapter(activity as Context,restaurantInfoList)
         recyclerView.adapter=recyclerAdapter
         recyclerView.layoutManager=layoutManager
+
+        btnCheckInternet=view.findViewById(R.id.btnCheckInternet)
+        btnCheckInternet.setOnClickListener{
+
+            if(ConnectionManager().checkConnectivity(activity as Context)){
+
+                val dialog=AlertDialog.Builder(activity as Context)
+                dialog.setTitle("Success")
+                dialog.setMessage("Internet Connection Found")
+                dialog.setPositiveButton("Ok"){text ,listener->
+
+                }
+                dialog.setNegativeButton("Cancel"){text ,listener->
+
+                }
+                dialog.create()
+                dialog.show()
+            }
+            else{
+                val dialog=AlertDialog.Builder(activity as Context)
+                dialog.setTitle("Error")
+                dialog.setMessage("Connect to Internet")
+                dialog.setPositiveButton("Ok"){text ,listener->
+
+                }
+                dialog.setNegativeButton("Cancel"){text ,listener->
+
+                }
+                dialog.create()
+                dialog.show()
+            }
+        }
 
         return view
     }
