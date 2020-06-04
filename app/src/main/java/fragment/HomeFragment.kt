@@ -15,23 +15,22 @@ import model.Restaurant
 
 class HomeFragment : Fragment() {
 
-
     lateinit var recyclerView:RecyclerView
     lateinit var layoutManager:RecyclerView.LayoutManager
 
     val restaurantInfoList = arrayListOf<Restaurant>(
 
 
-        Restaurant("ABC Food Court", "4.1", "Rs. 299", R.drawable.r2),
-        Restaurant("XYZ Cafe", "3.4", "Rs. 399", R.drawable.r9),
-        Restaurant("BurgerVala", "4.8", "Rs. 379", R.drawable.r6),
-        Restaurant("MNO Restaurant", "4.5", "Rs. 249", R.drawable.r3),
-        Restaurant("Verma's CakeOClock", "2.4", "Rs. 149", R.drawable.r4),
-        Restaurant("LMN Restaurant", "3.1", "Rs. 99", R.drawable.r7),
-        Restaurant("DEF Restaurant", "4.0", "Rs. 349", R.drawable.r5),
-        Restaurant("PQR Food Court", "3.7", "Rs. 299", R.drawable.r1),
-        Restaurant("abc", "3.9", "Rs. 399", R.drawable.r8),
-        Restaurant("Coffee House", "4.3", "Rs. 249", R.drawable.r9)
+        Restaurant("ABC Food Court", "4.1", "299", R.drawable.r2),
+        Restaurant("XYZ Cafe", "3.4", "399", R.drawable.r9),
+        Restaurant("BurgerVala", "4.8", "379", R.drawable.r6),
+        Restaurant("MNO Restaurant", "4.5", "249", R.drawable.r3),
+        Restaurant("Verma's CakeOClock", "2.4", "149", R.drawable.r4),
+        Restaurant("LMN Restaurant", "3.1", "139", R.drawable.r7),
+        Restaurant("DEF Food Court", "4.0", "349", R.drawable.r5),
+        Restaurant("PQR Restaurant", "3.7", "299", R.drawable.r1),
+        Restaurant("abc Cafe", "3.9", "399", R.drawable.r8),
+        Restaurant("Coffee House", "4.3", "249", R.drawable.r9)
 
     )
 
