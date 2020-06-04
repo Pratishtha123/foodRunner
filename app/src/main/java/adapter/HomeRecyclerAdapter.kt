@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.pratishtha.foodrunner.R
+import com.squareup.picasso.Picasso
 import model.Restaurant
 
 class HomeRecyclerAdapter(val context:Context,val itemList:ArrayList<Restaurant>) :RecyclerView.Adapter<HomeRecyclerAdapter.HomeViewHolder>(){
@@ -41,8 +42,10 @@ class HomeRecyclerAdapter(val context:Context,val itemList:ArrayList<Restaurant>
         val restaurant=itemList[position]
         holder.txtRestaurantName.text= restaurant.restaurantName
         holder.txtRating.text=restaurant.restaurantRating
-        holder.txtPrice.text=restaurant.restaurantPrice
-        holder.imgRestaurantImage.setImageResource(restaurant.restaurantImage)
+        holder.txtPrice.text=restaurant.restaurantCost_For_One
+       // holder.imgRestaurantImage.setImageResource(restaurant.restaurantImage)
+
+        Picasso.get().load(restaurant.restaurantImage).into(holder.imgRestaurantImage)
 
         holder.rlContent.setOnClickListener{
             Toast.makeText(context,"Clicked on ${holder.txtRestaurantName.text}",Toast.LENGTH_SHORT).show()

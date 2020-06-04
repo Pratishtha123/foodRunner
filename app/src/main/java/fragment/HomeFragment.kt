@@ -2,6 +2,7 @@ package fragment
 
 import adapter.HomeRecyclerAdapter
 import android.app.AlertDialog
+import android.app.DownloadManager
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,11 +10,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.pratishtha.foodrunner.R
 import model.Restaurant
 import util.ConnectionManager
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class HomeFragment : Fragment() {
@@ -23,10 +31,9 @@ class HomeFragment : Fragment() {
 
     lateinit var btnCheckInternet:Button
 
-    val restaurantInfoList = arrayListOf<Restaurant>(
+    val restaurantInfoList = arrayListOf<Restaurant>()
 
-
-        Restaurant("ABC Food Court", "4.1", "299", R.drawable.r2),
+      /*  Restaurant("ABC Food Court", "4.1", "299", R.drawable.r2),
         Restaurant("XYZ Cafe", "3.4", "399", R.drawable.r9),
         Restaurant("BurgerVala", "4.8", "379", R.drawable.r6),
         Restaurant("MNO Restaurant", "4.5", "249", R.drawable.r3),
@@ -39,6 +46,8 @@ class HomeFragment : Fragment() {
 
     )
 
+       */
+
     lateinit var recyclerAdapter: HomeRecyclerAdapter
 
     override fun onCreateView(
@@ -49,12 +58,6 @@ class HomeFragment : Fragment() {
         val view=inflater.inflate(R.layout.fragment_home, container, false )
 
         recyclerView=view.findViewById(R.id.recyclerView)
-        layoutManager=LinearLayoutManager(activity)
-
-        recyclerAdapter= HomeRecyclerAdapter(activity as Context,restaurantInfoList)
-        recyclerView.adapter=recyclerAdapter
-        recyclerView.layoutManager=layoutManager
-
         btnCheckInternet=view.findViewById(R.id.btnCheckInternet)
         btnCheckInternet.setOnClickListener{
 
@@ -87,6 +90,44 @@ class HomeFragment : Fragment() {
             }
         }
 
+        layoutManager=LinearLayoutManager(activity)
+
+
+        val queue=Volley.newRequestQueue(activity as Context)
+        val url="http://13.235.250.119/v2/restaurants/fetch_result/"
+        val jsonObjectRequest= object :JsonObjectRequest(Request.Method.GET,url,null,Response.Listener{
+
+            val success=it.getBoolean("success")
+            if(success){
+                val data=it.getJSONArray("data")
+                for(i in 0 until data.length()) {
+                    val restaurantJsonObject = data.getJSONObject(i)
+                    val restaurantObject = Restaurant(
+                        restaurantJsonObject.getString("restaurant_id"),
+                        restaurantJsonObject.getString("name"),
+                        restaurantJsonObject.getString("rating"),
+                        restaurantJsonObject.getString("price"),
+                        restaurantJsonObject.getString("image")
+                    )
+                    restaurantInfoList.add(restaurantObject)
+                    recyclerAdapter= HomeRecyclerAdapter(activity as Context,restaurantInfoList)
+                    recyclerView.adapter=recyclerAdapter
+                    recyclerView.layoutManager=layoutManager
+                }
+            }else{
+                Toast.makeText(activity as Context,"Some Error Occurred",Toast.LENGTH_SHORT).show()
+            }
+        },Response.ErrorListener {
+
+        }){
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers=HashMap<String,String>()
+                headers["Content-type"]="application/json"
+                headers["token"]="05ed6a9a010009"
+                return headers
+            }
+        }
+        queue.add(jsonObjectRequest)
         return view
     }
 
