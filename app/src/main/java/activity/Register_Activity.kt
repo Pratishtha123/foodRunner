@@ -37,14 +37,15 @@ class Register_Activity : AppCompatActivity() {
     lateinit var sessionManager:SessionManager
 
     var emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-    var mobilePattern = "[0-9]{10}"
+    var mobilePattern = "[7-9][0-9]{9}"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         title="Register Yourself"
 
-        sharedpreferences = getSharedPreferences(getString(R.string.preference_file_name), Context.MODE_PRIVATE)
+        sessionManager = SessionManager(this@Register_Activity)
+        sharedpreferences = getSharedPreferences(sessionManager.PREF_NAME, Context.MODE_PRIVATE)
 
         etName=findViewById(R.id.etName)
         etEmail=findViewById(R.id.etEmail)
@@ -72,28 +73,19 @@ class Register_Activity : AppCompatActivity() {
                 Toast.makeText(this@Register_Activity,"Enter a valid Email Id",Toast.LENGTH_LONG).show()
             else if(!etMobileNumber2.text.toString().trim().matches(mobilePattern.toRegex()))
                 Toast.makeText(this@Register_Activity,"Enter a valid Mobile number",Toast.LENGTH_LONG).show()
-            else if (etPassword2.length()<4) {
+            else if (etPassword2.length()<5) {
                 Toast.makeText(this@Register_Activity, "Weak Password", Toast.LENGTH_LONG).show()
             }
-
             else {
                 sendRegisterRequest(etName.text.toString(),etMobileNumber2.text.toString(),etAddress.text.toString(),etPassword2.text.toString(),etEmail.text.toString())
-               /* val intent = Intent(this@Register_Activity, Show_Details::class.java)
-                intent.putExtra("Name", etName.text.toString())
-                intent.putExtra("Email", etEmail.text.toString())
-                intent.putExtra("Mobile", etMobileNumber2.text.toString())
-                intent.putExtra("Address", etAddress.text.toString())
 
-                startActivity(intent)*/
                 Toast.makeText(this@Register_Activity, "Successfully Registered", Toast.LENGTH_LONG)
                     .show()
                 val intent=Intent(this@Register_Activity,Main2_Activity::class.java)
                 startActivity(intent)
             }
         }
-
     }
-
     override fun onPause() {
         super.onPause()
         finish()
@@ -144,7 +136,6 @@ class Register_Activity : AppCompatActivity() {
                         val errorMessage=data.getString("errorMessage")
                         Toast.makeText(this@Register_Activity,errorMessage,Toast.LENGTH_SHORT).show()
                     }
-
                 }catch(e:Exception){
                     rlRegister.visibility=View.VISIBLE
                     //progressBar.visibility=View.INVISIBLE
