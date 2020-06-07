@@ -1,14 +1,17 @@
 package activity
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.android.volley.Request
 import com.android.volley.Request.*
 import com.android.volley.Response
@@ -20,6 +23,7 @@ import fragment.HomeFragment
 import kotlinx.android.synthetic.main.activity_description.*
 import kotlinx.android.synthetic.main.activity_register.*
 import org.json.JSONObject
+import util.ConnectionManager
 import util.SessionManager
 import java.lang.Exception
 
@@ -73,7 +77,7 @@ class Register_Activity : AppCompatActivity() {
                 Toast.makeText(this@Register_Activity,"Enter a valid Email Id",Toast.LENGTH_LONG).show()
             else if(!etMobileNumber2.text.toString().trim().matches(mobilePattern.toRegex()))
                 Toast.makeText(this@Register_Activity,"Enter a valid Mobile number",Toast.LENGTH_LONG).show()
-            else if (etPassword2.length()<5) {
+            else if (etPassword2.length()<4) {
                 Toast.makeText(this@Register_Activity, "Weak Password", Toast.LENGTH_LONG).show()
             }
             else {
@@ -102,8 +106,9 @@ class Register_Activity : AppCompatActivity() {
         jsonParams.put("address",address)
         jsonParams.put("email",email)
 
+        if (ConnectionManager().checkConnectivity(this@Register_Activity)){
         val jsonObjectRequest=object :JsonObjectRequest(
-            Request.Method.POST,
+            Method.POST,
             url,
             jsonParams,
             Response.Listener {
@@ -133,8 +138,7 @@ class Register_Activity : AppCompatActivity() {
                 }else{
                         rlRegister.visibility= View.VISIBLE
                         //progressBar.visibility=View.INVISIBLE
-                        val errorMessage=data.getString("errorMessage")
-                        Toast.makeText(this@Register_Activity,errorMessage,Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@Register_Activity,"Some error occurred!",Toast.LENGTH_SHORT).show()
                     }
                 }catch(e:Exception){
                     rlRegister.visibility=View.VISIBLE
@@ -142,7 +146,7 @@ class Register_Activity : AppCompatActivity() {
                     e.printStackTrace()
                 }
             }, Response.ErrorListener {
-                    Toast.makeText(this@Register_Activity,it.message,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Register_Activity,"Volley Error!",Toast.LENGTH_SHORT).show()
                      rlRegister.visibility=View.VISIBLE
                      //progressBar.visibility=View.VISIBLE
             }){
@@ -154,5 +158,23 @@ class Register_Activity : AppCompatActivity() {
             }
         }
         queue.add(jsonObjectRequest)
-    }
+    }else
+        {
+            val dialog= AlertDialog.Builder(this@Register_Activity)
+            dialog.setTitle("Error")
+            dialog.setMessage("Internet Connection Found")
+            dialog.setPositiveButton("Open Settings"){ text,listener->
+                val settingsIntent=Intent(Settings.ACTION_WIRELESS_SETTINGS)
+                startActivity(settingsIntent)
+                this.finish()
+
+            }
+            dialog.setNegativeButton("Exit"){ text,listener->
+
+                ActivityCompat.finishAffinity(this@Register_Activity)
+            }
+            dialog.create()
+            dialog.show()
+        }
+}
 }

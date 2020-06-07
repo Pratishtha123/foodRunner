@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="activity.Forgot_Activity"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    android:id="@+id/rlContent">
 
 
     <ImageView

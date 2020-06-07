@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="activity.DescriptionActivity"></activity>
+        <activity android:name="activity.Reset_Password_Activity"></activity>
+        <activity android:name="activity.DescriptionActivity" />
         <activity android:name="activity.Main2_Activity" />
         <activity android:name="activity.Show_Details" />
         <activity android:name=".Login_Success" />
