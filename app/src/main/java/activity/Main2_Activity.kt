@@ -1,22 +1,23 @@
 package activity
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
-import fragment.LogoutFragment
-import fragment.OrderHistoryFragment
-import fragment.ProfileFragment
 import com.pratishtha.foodrunner.R
-import fragment.FaqFragment
-import fragment.FavouriteFragment
-import fragment.HomeFragment
+import fragment.*
+import util.SessionManager
 
 class Main2_Activity : AppCompatActivity() {
 
@@ -25,6 +26,8 @@ class Main2_Activity : AppCompatActivity() {
     lateinit var toolbar: Toolbar
     lateinit var frameLayout: FrameLayout
     lateinit var navigationView: NavigationView
+    lateinit var sharedpreferences: SharedPreferences
+    lateinit var sessionManager: SessionManager
 
 
     var previousMenuItem:MenuItem?=null
@@ -39,6 +42,8 @@ class Main2_Activity : AppCompatActivity() {
         toolbar=findViewById(R.id.toolbar)
         frameLayout=findViewById(R.id.frameLayout)
         navigationView=findViewById(R.id.navigationView)
+        sessionManager = SessionManager(this@Main2_Activity)
+        sharedpreferences = getSharedPreferences(sessionManager.PREF_NAME, Context.MODE_PRIVATE)
 
         setUpToolbar()
 
@@ -109,15 +114,29 @@ class Main2_Activity : AppCompatActivity() {
                 }
 
                 R.id.logout ->{
-                    supportFragmentManager.beginTransaction().replace(
-                        R.id.frameLayout,
-                        LogoutFragment()
-                    ).commit()
-                    drawerLayout.closeDrawers()
-                    supportActionBar?.title="LogOut"
+                    val builder=AlertDialog.Builder(this@Main2_Activity)
+                    builder.setTitle("Confirmation")
+                    builder.setMessage("Are you sure you want to log out?")
+                    builder.setPositiveButton("Yes"){dialogInterface,which->
+                        val intent= Intent(this@Main2_Activity,Main_Activity::class.java)
+                        val editor: SharedPreferences.Editor = sharedpreferences.edit()
+                        editor.clear()
+                        editor.apply()
+                        val alertDialog:AlertDialog=builder.create()
+                        alertDialog.dismiss()
+                        startActivity(intent)
+                        finish()
+                    }
+                    builder.setNeutralButton("Cancel"){dialogInterface,which->
+                        Toast.makeText(applicationContext,"clicked cancel",Toast.LENGTH_SHORT).show()
+                    }
+                    builder.setNegativeButton("No"){dialogueInterface,which->
+                        Toast.makeText(applicationContext,"clicked No",Toast.LENGTH_SHORT).show()
+                    }
+                    val alertDialog:AlertDialog=builder.create()
+                    alertDialog.setCancelable(false)
+                    alertDialog.show()
                 }
-
-
             }
 
             return@setNavigationItemSelectedListener(true)
@@ -155,5 +174,7 @@ class Main2_Activity : AppCompatActivity() {
             else->super.onBackPressed()
 
         }
+
+
     }
 }
