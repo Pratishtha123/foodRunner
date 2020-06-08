@@ -1,11 +1,8 @@
 package activity
 
 import adapter.DescriptionRecyclerAdapter
-import adapter.HomeRecyclerAdapter
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
@@ -13,22 +10,18 @@ import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.pratishtha.foodrunner.R
-import kotlinx.android.synthetic.main.activity_description.*
 import model.Description
-import model.Restaurant
-import org.json.JSONObject
 import util.ConnectionManager
-import java.lang.Exception
 
 class DescriptionActivity : AppCompatActivity() {
 
@@ -42,6 +35,7 @@ class DescriptionActivity : AppCompatActivity() {
     lateinit var recyclerAdapter: DescriptionRecyclerAdapter
     lateinit var progressLayout: RelativeLayout
     lateinit var progressBar: ProgressBar
+    lateinit var restaurantName:String
 
     var restaurantId:String?="100"
 
@@ -60,10 +54,10 @@ class DescriptionActivity : AppCompatActivity() {
 
         layoutManager=LinearLayoutManager(this@DescriptionActivity)
 
-        setUpToolbar()
 
         if (intent != null) {
             restaurantId = intent.getStringExtra("restaurant_id")
+            restaurantName=intent.getStringExtra("restaurant_name")
         } else {
             finish()
             Toast.makeText(
@@ -81,6 +75,7 @@ class DescriptionActivity : AppCompatActivity() {
             ).show()
         }
 
+        setUpToolbar(restaurantName)
         val queue=Volley.newRequestQueue(this@DescriptionActivity)
 
 
@@ -150,10 +145,23 @@ class DescriptionActivity : AppCompatActivity() {
     dialog.show()
        }
     }
-    fun setUpToolbar(){
+    fun setUpToolbar(name:String){
         setSupportActionBar(toolbar)
-        supportActionBar?.title="Menu List"
+        supportActionBar?.title=name
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener {
+            startActivity(
+                Intent(
+                    applicationContext,
+                    Main2_Activity::class.java
+                )
+            )
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        finish()
     }
 }

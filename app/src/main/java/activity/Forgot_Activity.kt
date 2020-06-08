@@ -29,7 +29,6 @@ class Forgot_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_)
-        //title="Retrieve Password"
 
         txtInstruction=findViewById(R.id.txtInstruction)
         etMobileNumber3=findViewById(R.id.etMobileNumber3)
@@ -41,9 +40,10 @@ class Forgot_Activity : AppCompatActivity() {
 
             if (validations(etMobileNumber3.text.toString(), etMailAddress.text.toString())) {
                 if (ConnectionManager().checkConnectivity(this@Forgot_Activity)) {
-                    //rlContent.visibility= View.GONE
+                    rlContent.visibility= View.GONE
                     sendOTP(etMobileNumber3.text.toString(), etMailAddress.text.toString())
                 } else {
+                    rlContent.visibility= View.VISIBLE
                     Toast.makeText(
                         this@Forgot_Activity,
                         "No Internet Connection!",
@@ -101,6 +101,7 @@ class Forgot_Activity : AppCompatActivity() {
                             builder.create().show()
                         }
                     } else {
+                        rlContent.visibility= View.VISIBLE
                         Toast.makeText(
                             this@Forgot_Activity,
                             "Mobile number not registered!",
@@ -109,6 +110,7 @@ class Forgot_Activity : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
+                    rlContent.visibility= View.VISIBLE
                     Toast.makeText(
                         this@Forgot_Activity,
                         "Incorrect response error!",
@@ -116,6 +118,7 @@ class Forgot_Activity : AppCompatActivity() {
                     ).show()
                 }
             }, Response.ErrorListener {
+                rlContent.visibility= View.VISIBLE
                 Toast.makeText(this@Forgot_Activity, "Volley Error!", Toast.LENGTH_SHORT).show()
             }) {
                 override fun getHeaders(): MutableMap<String, String> {
@@ -160,5 +163,10 @@ class Forgot_Activity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        finish()
     }
 }

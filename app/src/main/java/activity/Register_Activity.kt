@@ -15,20 +15,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ActivityCompat
-import com.android.volley.Request
-import com.android.volley.Request.*
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.RequestFuture
 import com.android.volley.toolbox.Volley
 import com.pratishtha.foodrunner.R
-import fragment.HomeFragment
-import kotlinx.android.synthetic.main.activity_description.*
 import kotlinx.android.synthetic.main.activity_register.*
 import org.json.JSONObject
 import util.ConnectionManager
 import util.SessionManager
-import java.lang.Exception
 
 class Register_Activity : AppCompatActivity() {
 
@@ -195,5 +189,13 @@ class Register_Activity : AppCompatActivity() {
         supportActionBar?.title="Register Yourself"
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener {
+            startActivity(
+                Intent(
+                    applicationContext,
+                    Main_Activity::class.java
+                )
+            )
+        }
     }
 }
