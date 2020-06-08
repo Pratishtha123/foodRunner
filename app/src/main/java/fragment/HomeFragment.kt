@@ -8,10 +8,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
@@ -43,12 +41,24 @@ class HomeFragment : Fragment() {
     lateinit var progressLayout: RelativeLayout
     lateinit var progressBar: ProgressBar
 
+    var ratingComparator= Comparator<Restaurant>{restaurant1,restaurant2->
+        if(restaurant1.restaurantRating.compareTo(restaurant2.restaurantRating,true)==0)
+        {
+            restaurant1.restaurantName.compareTo(restaurant2.restaurantName,true)
+        }
+        else{
+            restaurant1.restaurantRating.compareTo(restaurant2.restaurantRating,true)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         val view=inflater.inflate(R.layout.fragment_home, container, false )
+
+        setHasOptionsMenu(true)
 
         recyclerView=view.findViewById(R.id.recyclerView)
         progressLayout=view.findViewById(R.id.progressLayout)
@@ -127,6 +137,20 @@ class HomeFragment : Fragment() {
             dialog.show()
         }
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater?.inflate(R.menu.menu_dashboard,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id=item?.itemId
+        if(id==R.id.action_sort){
+            Collections.sort(restaurantInfoList,ratingComparator)
+            restaurantInfoList.reverse()
+        }
+        recyclerAdapter.notifyDataSetChanged()
+        return super.onOptionsItemSelected(item)
     }
 
 }
