@@ -9,10 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,6 +34,9 @@ class DescriptionActivity : AppCompatActivity() {
 
     lateinit var recyclerView: RecyclerView
     lateinit var layoutManager:RecyclerView.LayoutManager
+    lateinit var coordinateLayout: CoordinatorLayout
+    lateinit var toolbar: Toolbar
+    lateinit var frameLayout: FrameLayout
 
     val dishInfoList= arrayListOf<Description>()
     lateinit var recyclerAdapter: DescriptionRecyclerAdapter
@@ -49,9 +54,13 @@ class DescriptionActivity : AppCompatActivity() {
         progressLayout=findViewById(R.id.progressLayout)
         progressBar=findViewById(R.id.progressBar)
         progressBar.visibility=View.VISIBLE
+        coordinateLayout=findViewById(R.id.coordinateLayout)
+        toolbar=findViewById(R.id.toolbar)
+        frameLayout=findViewById(R.id.frameLayout)
 
         layoutManager=LinearLayoutManager(this@DescriptionActivity)
 
+        setUpToolbar()
 
         if (intent != null) {
             restaurantId = intent.getStringExtra("restaurant_id")
@@ -140,5 +149,11 @@ class DescriptionActivity : AppCompatActivity() {
     dialog.create()
     dialog.show()
        }
+    }
+    fun setUpToolbar(){
+        setSupportActionBar(toolbar)
+        supportActionBar?.title="Menu List"
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

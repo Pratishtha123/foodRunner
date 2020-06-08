@@ -9,8 +9,11 @@ import android.provider.Settings
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ActivityCompat
 import com.android.volley.Request
 import com.android.volley.Request.*
@@ -37,6 +40,10 @@ class Register_Activity : AppCompatActivity() {
     lateinit var etConfirmPassword:EditText
     lateinit var btnRegisterPage:Button
 
+    lateinit var coordinateLayout: CoordinatorLayout
+    lateinit var toolbar: Toolbar
+    lateinit var frameLayout: FrameLayout
+
     lateinit var sharedpreferences: SharedPreferences
     lateinit var sessionManager:SessionManager
 
@@ -58,6 +65,12 @@ class Register_Activity : AppCompatActivity() {
         etPassword2=findViewById(R.id.etPassword2)
         etConfirmPassword=findViewById(R.id.etConfirmPassword)
         btnRegisterPage=findViewById(R.id.btnRegisterPage)
+
+        coordinateLayout=findViewById(R.id.coordinateLayout)
+        toolbar=findViewById(R.id.toolbar)
+        frameLayout=findViewById(R.id.frameLayout)
+
+        setUpToolbar()
 
         btnRegisterPage.setOnClickListener {
 
@@ -177,4 +190,10 @@ class Register_Activity : AppCompatActivity() {
             dialog.show()
         }
 }
+    fun setUpToolbar(){
+        setSupportActionBar(toolbar)
+        supportActionBar?.title="Register Yourself"
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 }

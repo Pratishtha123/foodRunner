@@ -83,7 +83,7 @@ class Main2_Activity : AppCompatActivity() {
                         ProfileFragment()
                     ).commit()
                     drawerLayout.closeDrawers()
-                    supportActionBar?.title="Profile"
+                    supportActionBar?.title="My Profile"
                 }
 
                 R.id.favourites ->{
@@ -92,7 +92,7 @@ class Main2_Activity : AppCompatActivity() {
                         FavouriteFragment()
                     ).commit()
                     drawerLayout.closeDrawers()
-                    supportActionBar?.title="Favourite Restaturants"
+                    supportActionBar?.title="Favourite Restaurants"
                 }
 
                 R.id.orderHistory ->{
@@ -101,7 +101,7 @@ class Main2_Activity : AppCompatActivity() {
                         OrderHistoryFragment()
                     ).commit()
                     drawerLayout.closeDrawers()
-                    supportActionBar?.title="Order History"
+                    supportActionBar?.title="My Previous Orders"
                 }
 
                 R.id.faq ->{
@@ -110,7 +110,7 @@ class Main2_Activity : AppCompatActivity() {
                         FaqFragment()
                     ).commit()
                     drawerLayout.closeDrawers()
-                    supportActionBar?.title="FAQs"
+                    supportActionBar?.title="Frequently Asked Questions"
                 }
 
                 R.id.logout ->{
