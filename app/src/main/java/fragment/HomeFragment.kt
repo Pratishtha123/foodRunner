@@ -56,6 +56,7 @@ class HomeFragment : Fragment() {
 
         progressBar.visibility=View.VISIBLE
 
+
         layoutManager=LinearLayoutManager(activity)
 
         val queue= Volley.newRequestQueue(activity as Context)
@@ -94,10 +95,10 @@ class HomeFragment : Fragment() {
                             ).show()
                         }
                     }catch(e:JSONException){
-                        Toast.makeText(activity as Context,"Some unwanted Exception!",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity as Context,"Some unwanted Exception!!",Toast.LENGTH_SHORT).show()
                     }
                 }, Response.ErrorListener {
-                    Toast.makeText(activity as Context,"Volley error occurred!",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity as Context,"Volley error occurred",Toast.LENGTH_SHORT).show()
                 }) {
                     override fun getHeaders(): MutableMap<String, String> {
                         val headers = HashMap<String, String>()
@@ -129,6 +130,3 @@ class HomeFragment : Fragment() {
     }
 
 }
-
-
-

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:background="#ffffff"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp"
+    android:layout_margin="6dp">
+
+
+    <RelativeLayout
+        android:id="@+id/rlContent2"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="5dp">
+
+    <TextView
+        android:id="@+id/txtCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="1"
+        android:textSize="15sp"
+        android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/txtDishName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="List Item1"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"/>
+
+
+        <TextView
+            android:id="@+id/txtPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rs.299"
+            android:textStyle="bold"
+            android:layout_marginLeft="45dp"
+            android:layout_below="@id/txtDishName"/>
+
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorAccent"
+            android:text="Add"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_marginTop="25dp"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

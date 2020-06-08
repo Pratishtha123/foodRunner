@@ -6,9 +6,31 @@
     android:layout_height="match_parent"
     tools:context="activity.DescriptionActivity">
 
+    <TextView
+        android:id="@+id/txtChoose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_from_the_menu_listed_below"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/imgFav"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/fav2"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="wrap_content"
+        android:layout_below="@id/txtChoose"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:id="@+id/recyclerView"
         android:padding="5dp"/>
 
@@ -23,7 +45,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"/>
-
 
     </RelativeLayout>
 

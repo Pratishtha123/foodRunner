@@ -49,7 +49,7 @@ class Reset_Password_Activity : AppCompatActivity() {
             rlContent3.visibility = View.GONE
             if (ConnectionManager().checkConnectivity(this@Reset_Password_Activity)) {
                 if (etOTP.text.length == 4) {
-                    if (Validations.validatePasswordLength(etConfirmPassword3.text.toString())) {
+                    if (Validations.validatePasswordLength(etPassword3.text.toString())) {
                         if (Validations.matchPassword(
                                 etPassword3.text.toString(),
                                 etConfirmPassword3.text.toString()
