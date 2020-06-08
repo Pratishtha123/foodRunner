@@ -11,7 +11,8 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/coordinateLayout">
+        android:id="@+id/coordinateLayout"
+        app:layout_scrollFlags="scroll|enterAlways">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -40,9 +41,8 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:headerLayout="@layout/drawer_header"
         app:menu="@menu/menu_drawer"
         android:layout_gravity="start"/>
 

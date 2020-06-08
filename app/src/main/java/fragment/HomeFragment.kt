@@ -3,18 +3,17 @@ package fragment
 import adapter.HomeRecyclerAdapter
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.view.*
-import androidx.fragment.app.Fragment
-import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -22,10 +21,10 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.pratishtha.foodrunner.R
+import kotlinx.android.synthetic.main.activity_main2_.*
 import model.Restaurant
 import org.json.JSONException
 import util.ConnectionManager
-import java.lang.Exception
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -65,9 +64,8 @@ class HomeFragment : Fragment() {
         progressBar=view.findViewById(R.id.progressBar)
 
         progressBar.visibility=View.VISIBLE
-
-
         layoutManager=LinearLayoutManager(activity)
+
 
         val queue= Volley.newRequestQueue(activity as Context)
         val url="http://13.235.250.119/v2/restaurants/fetch_result/"
