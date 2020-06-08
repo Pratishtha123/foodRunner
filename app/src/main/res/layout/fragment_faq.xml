@@ -1,13 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<RelativeLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context="fragment.FaqFragment">
 
     <TextView
+        android:id="@+id/txtQa"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Faq" />
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:textColor="@color/colorAccent"
+        android:text="@string/Q1"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/txtAa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_below="@id/txtQa"
+        android:text="@string/A1"
+       android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/txtQb"
+        android:layout_width="match_parent"
+        android:layout_below="@id/txtAa"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:textColor="@color/colorAccent"
+        android:text="@string/Q2"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/txtAb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_below="@id/txtQb"
+        android:text="@string/A2"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/txtQc"
+        android:layout_width="match_parent"
+        android:layout_below="@id/txtAb"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:textColor="@color/colorAccent"
+        android:text="@string/Q3"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/txtAc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_below="@id/txtQc"
+        android:text="@string/A3"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/txtQd"
+        android:layout_width="match_parent"
+        android:layout_below="@id/txtAc"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:textColor="@color/colorAccent"
+        android:text="@string/Q4"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/txtAd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_below="@id/txtQd"
+        android:text="@string/A4"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/txtQe"
+        android:layout_width="match_parent"
+        android:layout_below="@id/txtAd"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:textColor="@color/colorAccent"
+        android:text="@string/Q5"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/txtAe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_below="@id/txtQe"
+        android:text="@string/A5"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/txtQf"
+        android:layout_width="match_parent"
+        android:layout_below="@id/txtAe"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:textColor="@color/colorAccent"
+        android:text="@string/Q6"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+    android:id="@+id/txtAf"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="10dp"
+    android:layout_below="@id/txtQf"
+    android:text="@string/A6"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="25dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#ffffff"
+        android:layout_below="@id/txtAf"/>
 
 </RelativeLayout>
+</ScrollView>

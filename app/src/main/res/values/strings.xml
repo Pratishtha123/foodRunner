@@ -32,4 +32,17 @@
     <string name="_299">299</string>
     <string name="person">/person</string>
     <string name="choose_from_the_menu_listed_below">Choose from the menu listed below:</string>
+    <string name="Q1">Q1. What payment types do you accept?</string>
+    <string name="A1">A1. Getting your food to your face should be easy, so paying for your food needs to be easy too. We accept all the major online payment methods.
+        This means you can use VISA, MasterCard, American Express and PayPal.You can also make your Payment by Cash.</string>
+    <string name="Q2">Q2. I haven’t received a confirmation email from City Cheetah.</string>
+    <string name="A2">A2. We bet it was gremlins, but it could be that we don’t have your correct email address. You should probably call us on 1-855-4-RUNNER or 1-855-424-3382 so we can check it out.</string>
+    <string name="Q3">Q3. Once I’ve placed my order, can I contact the restaurant direct?</string>
+    <string name="A3">A3. Sure can! Check your confirmation email for the restaurant number and give them a buzz if you have any questions or requests on the prep and delivery of the food. Feel free to give us a buzz too, we\'re always happy to help out if you’ve not been able to get through to the restaurant.</string>
+    <string name="Q4">Q4. I have just placed my order but need to change something (add or remove an item, change delivery to pick-up, etc.)</string>
+    <string name="A4">A4. Got your confirmation SMS/Email? You’d better give the restaurant a quick call to see if they can help out before they start making your food. If you haven’t got the SMS yet, or you can’t get through to the restaurant, give us a shout out at 1-855-4-RUNNER or 1-855-424-3382 so we can assist you.</string>
+    <string name="Q5">Q5. I need to cancel my order.</string>
+    <string name="A5">A5. We understand sometimes things don’t go as planned, and you might need to cancel an order. We can cancel an order if the restaurant hasn’t started cooking it yet. If the restaurant has started to cook your food there is a small chance they might still be able to offer you a refund or credit, so best to call them and find out. If you can\'t get through to the restaurant, give us a shout out at 1-855-4-RUNNER or 1-855-424-3382 - someone from our Dispatch Team will be happy to assist you.</string>
+    <string name="Q6">Q6. I have received my order but it’s not what I requested!</string>
+    <string name="A6">A6. Quick, double check the confirmation email! Maybe the computer gremlins threw in some extra sides for themselves? If there is a difference between what’s on the email and what you received, please call the restaurant right away to let them know. Of course, our team are also always happy to help you out if you’re not able to resolve this directly with the restaurant.</string>
 </resources>
