@@ -23,6 +23,7 @@ class Forgot_Activity : AppCompatActivity() {
     lateinit var btnNext:Button
     lateinit var rlContent:RelativeLayout
 
+
     var emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
     var mobilePattern = "[0-9]{10}"
 
@@ -35,15 +36,15 @@ class Forgot_Activity : AppCompatActivity() {
         etMailAddress=findViewById(R.id.etMailAddress)
         btnNext=findViewById(R.id.btnNext)
         rlContent=findViewById(R.id.rlContent)
+        rlContent.visibility= View.VISIBLE
 
         btnNext.setOnClickListener {
 
             if (validations(etMobileNumber3.text.toString(), etMailAddress.text.toString())) {
                 if (ConnectionManager().checkConnectivity(this@Forgot_Activity)) {
-                    rlContent.visibility= View.GONE
+
                     sendOTP(etMobileNumber3.text.toString(), etMailAddress.text.toString())
                 } else {
-                    rlContent.visibility= View.VISIBLE
                     Toast.makeText(
                         this@Forgot_Activity,
                         "No Internet Connection!",
@@ -101,7 +102,6 @@ class Forgot_Activity : AppCompatActivity() {
                             builder.create().show()
                         }
                     } else {
-                        rlContent.visibility= View.VISIBLE
                         Toast.makeText(
                             this@Forgot_Activity,
                             "Mobile number not registered!",
@@ -110,7 +110,6 @@ class Forgot_Activity : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    rlContent.visibility= View.VISIBLE
                     Toast.makeText(
                         this@Forgot_Activity,
                         "Incorrect response error!",
@@ -118,7 +117,6 @@ class Forgot_Activity : AppCompatActivity() {
                     ).show()
                 }
             }, Response.ErrorListener {
-                rlContent.visibility= View.VISIBLE
                 Toast.makeText(this@Forgot_Activity, "Volley Error!", Toast.LENGTH_SHORT).show()
             }) {
                 override fun getHeaders(): MutableMap<String, String> {

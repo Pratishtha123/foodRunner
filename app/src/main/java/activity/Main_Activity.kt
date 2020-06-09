@@ -96,6 +96,9 @@ class Main_Activity : AppCompatActivity() {
                                 val data = it.getJSONObject("data")
                                 val success = data.getBoolean("success")
                                 if (success) {
+                                    btnLogin.isEnabled = false
+                                    btnLogin.isClickable = false
+
                                     val response = data.getJSONObject("data")
                                     sharedpreferences.edit()
                                         .putString("user_id", response.getString("user_id")).apply()
