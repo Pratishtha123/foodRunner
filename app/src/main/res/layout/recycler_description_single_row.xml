@@ -35,12 +35,22 @@
 
 
         <TextView
+            android:id="@+id/txtRs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rs."
+            android:textStyle="bold"
+            android:layout_marginLeft="45dp"
+            android:layout_below="@id/txtDishName"/>
+
+        <TextView
             android:id="@+id/txtPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rs.299"
+            android:text="299"
             android:textStyle="bold"
-            android:layout_marginLeft="45dp"
+            android:layout_toRightOf="@id/txtRs"
+            android:layout_marginLeft="3dp"
             android:layout_below="@id/txtDishName"/>
 
 

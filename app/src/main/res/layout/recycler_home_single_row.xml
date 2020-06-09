@@ -4,7 +4,8 @@
     android:background="#ffffff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="4dp"
-    android:layout_margin="6dp">
+    android:layout_margin="6dp"
+    android:id="@+id/cardRestaurant">
 
 <RelativeLayout
     android:layout_width="match_parent"
@@ -80,14 +81,14 @@
         android:layout_marginRight="10dp"
         android:padding="5dp"/>
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imgFav"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/fav2"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:background="@drawable/fav"/>
 
 
 </RelativeLayout>
