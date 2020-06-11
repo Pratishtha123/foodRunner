@@ -10,7 +10,13 @@ import com.pratishtha.foodrunner.R
 import model.Description
 import model.Restaurant
 
-class DescriptionRecyclerAdapter(val context: Context, val itemList:ArrayList<Description>) :RecyclerView.Adapter<DescriptionRecyclerAdapter.DescriptionViewHolder>() {
+class DescriptionRecyclerAdapter(val context: Context, val itemList:ArrayList<Description>, private val listener: OnItemClickListener
+) :RecyclerView.Adapter<DescriptionRecyclerAdapter.DescriptionViewHolder>() {
+
+    companion object {
+        var isCartEmpty = true
+    }
+
 
     class DescriptionViewHolder(view: View): RecyclerView.ViewHolder(view){
 
@@ -18,6 +24,7 @@ class DescriptionRecyclerAdapter(val context: Context, val itemList:ArrayList<De
         val txtDishName: TextView =view.findViewById(R.id.txtDishName)
         val txtPrice: TextView =view.findViewById(R.id.txtPrice)
         val btnAdd: Button =view.findViewById(R.id.btnAdd)
+        val btnRemove:Button=view.findViewById(R.id.btnRemove)
 
     }
 
@@ -30,12 +37,35 @@ class DescriptionRecyclerAdapter(val context: Context, val itemList:ArrayList<De
         return itemList.size
     }
 
+
+    interface OnItemClickListener {
+        fun onAddItemClick(dishObject:Description)
+        fun onRemoveItemClick(dishObject:Description)
+    }
+
+
+
     override fun onBindViewHolder(holder: DescriptionViewHolder, position: Int) {
-       val description=itemList[position]
-        holder.txtDishName.text= description.dishName
-        holder.txtPrice.text=description.dishPrice
-        holder.btnAdd.setOnClickListener{
-            Toast.makeText(context,"Clicked on ${holder.txtDishName.text}",Toast.LENGTH_SHORT).show()
+        val description = itemList[position]
+        holder.txtDishName.text = description.dishName
+        holder.txtPrice.text = description.dishPrice
+        holder.txtCount.text = (position + 1).toString()
+
+        holder.btnAdd.setOnClickListener {
+            holder.btnRemove.visibility = View.VISIBLE
+            holder.btnAdd.visibility = View.GONE
+            listener.onAddItemClick(description)
+        }
+
+        holder.btnRemove.setOnClickListener {
+            holder.btnRemove.visibility = View.GONE
+            holder.btnAdd.visibility = View.VISIBLE
+            listener.onRemoveItemClick(description)
         }
     }
+        override fun getItemViewType(position: Int): Int {
+            return position
+        }
+
 }
+

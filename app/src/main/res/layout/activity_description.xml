@@ -17,11 +17,11 @@
         android:layout_marginTop="65dp"
         android:textStyle="bold"/>
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imgFav"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/fav2"
+        android:background="@drawable/fav"
         android:layout_alignParentRight="true"
         android:layout_marginRight="15dp"
         android:layout_marginTop="70dp"/>
@@ -76,6 +76,18 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+    <Button
+        android:id="@+id/btnGoToCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"
+        android:textColor="#ffffff"
+        android:text="@string/proceed_to_cart"
+        android:textAllCaps="false"
+        android:layout_marginHorizontal="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone"/>
 
 </RelativeLayout>

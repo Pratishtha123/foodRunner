@@ -45,4 +45,6 @@
     <string name="A5">A5. We understand sometimes things don’t go as planned, and you might need to cancel an order. We can cancel an order if the restaurant hasn’t started cooking it yet. If the restaurant has started to cook your food there is a small chance they might still be able to offer you a refund or credit, so best to call them and find out. If you can\'t get through to the restaurant, give us a shout out at 1-855-4-RUNNER or 1-855-424-3382 - someone from our Dispatch Team will be happy to assist you.</string>
     <string name="Q6">Q6. I have received my order but it’s not what I requested!</string>
     <string name="A6">A6. Quick, double check the confirmation email! Maybe the computer gremlins threw in some extra sides for themselves? If there is a difference between what’s on the email and what you received, please call the restaurant right away to let them know. Of course, our team are also always happy to help you out if you’re not able to resolve this directly with the restaurant.</string>
+    <string name="proceed_to_cart">Proceed to Cart</string>
+    <string name="ordering_from">Ordering from :</string>
 </resources>

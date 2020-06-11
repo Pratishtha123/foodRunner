@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/food_app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="activity.Reset_Password_Activity"></activity>
+        <activity android:name="activity.CartActivity"></activity>
+        <activity android:name="activity.Reset_Password_Activity" />
         <activity android:name="activity.DescriptionActivity" />
         <activity android:name="activity.Main2_Activity" />
         <activity android:name="activity.Show_Details" />

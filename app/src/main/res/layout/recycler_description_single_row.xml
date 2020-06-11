@@ -63,6 +63,23 @@
             android:text="Add"
             android:textColor="#ffffff"
             android:textStyle="bold"
+            android:visibility="visible"
+            android:textAllCaps="false"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="25dp"/>
+
+
+        <Button
+            android:id="@+id/btnRemove"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:background="@color/myColor"
+            android:text="Remove"
+            android:textColor="#ffffff"
+            android:visibility="gone"
+            android:textStyle="bold"
+            android:textAllCaps="false"
             android:layout_marginRight="5dp"
             android:layout_marginTop="25dp"/>
 
