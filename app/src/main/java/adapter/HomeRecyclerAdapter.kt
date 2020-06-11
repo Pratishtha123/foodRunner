@@ -26,7 +26,7 @@ import database.RestaurantEntity
 import fragment.HomeFragment
 import model.Restaurant
 
-class HomeRecyclerAdapter(val context:Context,val itemList:ArrayList<Restaurant>) :RecyclerView.Adapter<HomeRecyclerAdapter.HomeViewHolder>() {
+class HomeRecyclerAdapter(val context:Context, private val itemList:ArrayList<Restaurant>) :RecyclerView.Adapter<HomeRecyclerAdapter.HomeViewHolder>() {
 
     class HomeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
