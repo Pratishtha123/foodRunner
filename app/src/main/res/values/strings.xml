@@ -47,4 +47,6 @@
     <string name="A6">A6. Quick, double check the confirmation email! Maybe the computer gremlins threw in some extra sides for themselves? If there is a difference between what’s on the email and what you received, please call the restaurant right away to let them know. Of course, our team are also always happy to help you out if you’re not able to resolve this directly with the restaurant.</string>
     <string name="proceed_to_cart">Proceed to Cart</string>
     <string name="ordering_from">Ordering from :</string>
+    <string name="your_order_has_been_successfully_placed">Your Order has been successfully placed!</string>
+    <string name="place_order">Place Order</string>
 </resources>

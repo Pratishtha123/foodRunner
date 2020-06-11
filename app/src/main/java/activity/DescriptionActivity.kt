@@ -70,7 +70,8 @@ class DescriptionActivity : AppCompatActivity() {
         imgFav = findViewById(R.id.imgFav)
 
         btnGoToCart.setOnClickListener {
-            Toast.makeText(this@DescriptionActivity,"cart under construcution",Toast.LENGTH_SHORT).show()
+            val intent=Intent(this@DescriptionActivity,CartActivity::class.java)
+            startActivity(intent)
         }
 
 
