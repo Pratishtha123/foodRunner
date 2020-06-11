@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fragment.OrderHistoryFragment">
 
-    <TextView
-        android:id="@+id/txtText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:layout_marginLeft="5dp"
+        android:id="@+id/llHasOrders"
+        android:orientation="vertical">
+    
+    <TextView
+        android:id="@+id/txtStaticText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/your_previous_orders" />
 
     <View
@@ -18,15 +25,41 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/colorAccent"
-        android:layout_below="@id/txtText"/>
+        android:layout_below="@id/txtStaticText"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_below="@id/viewLine"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:id="@+id/recyclerOrderHistory"
+        android:padding="4dp"/>
+    </LinearLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:id="@+id/recyclerView"
-        android:padding="5dp"/>
+        android:id="@+id/rlNoOrders"
+        android:visibility="gone">
+
+    <ImageView
+        android:id="@+id/imgEmptyCart"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/empty"/>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Orders"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/imgEmptyCart"
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:padding="10dp"/>
+        
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/progressLayout"
@@ -43,4 +76,4 @@
     </RelativeLayout>
 
 
-</RelativeLayout>
+</FrameLayout>
