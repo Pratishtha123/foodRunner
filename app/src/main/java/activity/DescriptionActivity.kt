@@ -18,11 +18,13 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.pratishtha.foodrunner.R
+import database.OrderEntity
 import database.RestaurantDatabase
 import model.Description
 import util.ConnectionManager
@@ -70,8 +72,7 @@ class DescriptionActivity : AppCompatActivity() {
         imgFav = findViewById(R.id.imgFav)
 
         btnGoToCart.setOnClickListener {
-            val intent=Intent(this@DescriptionActivity,CartActivity::class.java)
-            startActivity(intent)
+            proceedToCart()
         }
 
 
@@ -186,19 +187,59 @@ class DescriptionActivity : AppCompatActivity() {
         }
     }
 
-    fun setUpToolbar(name:String){
+    private fun proceedToCart(){
+        val gson=Gson()
+        val foodItems=gson.toJson(orderList)
+        val async = CartItems(this@DescriptionActivity, restaurantId.toString(), foodItems, 1).execute()
+        val result = async.get()
+        if (result) {
+            val data = Bundle()
+            data.putString("resId", restaurantId )
+            data.putString("resName", restaurantName)
+            val intent = Intent(this@DescriptionActivity, CartActivity::class.java)
+            intent.putExtra("data", data)
+            startActivity(intent)
+        } else {
+            Toast.makeText(this@DescriptionActivity, "Some unexpected error", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    class CartItems(context: Context, private val restaurantId:String, private val foodItems:String, val mode:Int):
+        AsyncTask<Void,Void,Boolean>(){
+        val db=Room.databaseBuilder(context,RestaurantDatabase::class.java,"restaurants-db").build()
+        override fun doInBackground(vararg params: Void?): Boolean {
+
+            when (mode) {
+                1 -> {
+                    db.orderDao().insertOrder(OrderEntity(restaurantId, foodItems))
+                    db.close()
+                    return true
+                }
+
+                2 -> {
+                    db.orderDao().deleteOrder(OrderEntity(restaurantId, foodItems))
+                    db.close()
+                    return true
+                }
+            }
+            return false
+        }
+    }
+
+
+   private fun setUpToolbar(name:String){
+       toolbar=findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.title=name
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener {
-            startActivity(
-                Intent(
-                    applicationContext,
-                    Main2_Activity::class.java
-                )
-            )
-        }
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     override fun onPause() {
