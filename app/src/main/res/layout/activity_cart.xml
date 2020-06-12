@@ -7,7 +7,7 @@
     tools:context="activity.CartActivity">
 
     <RelativeLayout
-        android:id="@+id/rlCart"
+        android:id="@+id/rlMyCart"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -72,7 +72,7 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <Button
-            android:id="@+id/btnPlaceOrder"
+            android:id="@+id/btnOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
