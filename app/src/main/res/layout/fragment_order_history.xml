@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/llHasOrders"
+        android:id="@+id/llOrders"
         android:orientation="vertical">
     
     <TextView
@@ -32,18 +32,18 @@
         android:layout_below="@id/viewLine"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
-        android:id="@+id/recyclerOrderHistory"
+        android:id="@+id/recyclerView"
         android:padding="4dp"/>
     </LinearLayout>
     
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rlNoOrders"
+        android:id="@+id/rlNoOrder"
         android:visibility="gone">
 
     <ImageView
-        android:id="@+id/imgEmptyCart"
+        android:id="@+id/imgCart"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerInParent="true"
@@ -52,9 +52,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No Orders"
+            android:text="@string/no_orders"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/imgEmptyCart"
+            android:layout_below="@id/imgCart"
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:padding="10dp"/>

@@ -4,14 +4,14 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/llStaticOrderHistory"
+        android:id="@+id/llRestaurant"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="5"
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/txtResHistoryResName"
+            android:id="@+id/txtResName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3.5"
@@ -19,12 +19,13 @@
             android:padding="5dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/colorPrimary"/>
+
         <TextView
             android:id="@+id/txtDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:text="@string/dummy_date"
+            android:text="@string/date"
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/colorPrimary"/>
@@ -33,16 +34,16 @@
 
     <androidx.recyclerview.widget.RecyclerView
 
-        android:id="@+id/recyclerResHistoryItems"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/llStaticOrderHistory"
+        android:layout_below="@id/llRestaurant"
         android:padding="5dp"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/colorAccent"
-        android:layout_below="@id/recyclerResHistoryItems"/>
+        android:layout_below="@id/recyclerView"/>
 
 </RelativeLayout>
