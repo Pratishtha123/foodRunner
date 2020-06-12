@@ -25,14 +25,14 @@ import model.Restaurant
 
 class FavouriteFragment : Fragment() {
 
-    lateinit var recyclerFavourite: RecyclerView
+    lateinit var recyclerFav: RecyclerView
     lateinit var progressLayout: RelativeLayout
     lateinit var progressBar: ProgressBar
     lateinit var rlFav:RelativeLayout
     lateinit var rlNoFav:RelativeLayout
     lateinit var recyclerAdapter: HomeRecyclerAdapter
 
-    var dbRestaurantList= arrayListOf<Restaurant>()
+    var dbResList= arrayListOf<Restaurant>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +42,7 @@ class FavouriteFragment : Fragment() {
 
         val view=inflater.inflate(R.layout.fragment_favourite, container, false)
 
-        recyclerFavourite=view.findViewById(R.id.recyclerFavourite)
+        recyclerFav=view.findViewById(R.id.recyclerFav)
         progressLayout=view.findViewById(R.id.progressLayout)
         progressBar=view.findViewById(R.id.progressBar)
         rlFav=view.findViewById(R.id.rlFav)
@@ -55,9 +55,9 @@ class FavouriteFragment : Fragment() {
     }
 private fun setUpRecycler(view: View)
 {
-    recyclerFavourite=view.findViewById(R.id.recyclerFavourite)
-    val backgroundList=FavouritesAsync(activity as Context).execute().get()
-    if(backgroundList.isEmpty()){
+    recyclerFav=view.findViewById(R.id.recyclerFav)
+    val resList=FavouriteAsync(activity as Context).execute().get()
+    if(resList.isEmpty()){
         progressLayout.visibility=View.GONE
         rlFav.visibility=View.GONE
         rlNoFav.visibility=View.VISIBLE
@@ -66,8 +66,8 @@ private fun setUpRecycler(view: View)
         rlNoFav.visibility=View.GONE
         progressLayout.visibility=View.GONE
 
-        for (i in backgroundList){
-            dbRestaurantList.add(
+        for (i in resList){
+            dbResList.add(
                 Restaurant(
                     i.id.toString(),
                     i.name,
@@ -77,16 +77,16 @@ private fun setUpRecycler(view: View)
                 )
             )
         }
-        recyclerAdapter= HomeRecyclerAdapter(activity as Context,dbRestaurantList)
+        recyclerAdapter= HomeRecyclerAdapter(activity as Context,dbResList)
         var layoutManager=LinearLayoutManager(activity)
-        recyclerFavourite.layoutManager=layoutManager
-        recyclerFavourite.itemAnimator=DefaultItemAnimator()
-        recyclerFavourite.adapter=recyclerAdapter
-        recyclerFavourite.setHasFixedSize(true)
+        recyclerFav.layoutManager=layoutManager
+        recyclerFav.itemAnimator=DefaultItemAnimator()
+        recyclerFav.adapter=recyclerAdapter
+        recyclerFav.setHasFixedSize(true)
 
     }
 }
-    class FavouritesAsync( context: Context): AsyncTask<Void, Void, List<RestaurantEntity>>() {
+    class FavouriteAsync( context: Context): AsyncTask<Void, Void, List<RestaurantEntity>>() {
         val db= Room.databaseBuilder(context,RestaurantDatabase::class.java,"restaurants-db").build()
 
         override fun doInBackground(vararg params: Void?): List<RestaurantEntity> {

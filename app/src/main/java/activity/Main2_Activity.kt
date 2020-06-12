@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -48,17 +49,16 @@ class Main2_Activity : AppCompatActivity() {
         sharedpreferences = getSharedPreferences(sessionManager.PREF_NAME, Context.MODE_PRIVATE)
 
         setUpToolbar()
-
         openHome()
 
-        val convertView=
+        val view=
             LayoutInflater.from(this@Main2_Activity).inflate(R.layout.drawer_header,null)
-        val userName:TextView =convertView.findViewById(R.id.txtUserName)
-        val userPhone: TextView =convertView.findViewById(R.id.txtPhoneNumber)
+        val userName:TextView =view.findViewById(R.id.txtUserName)
+        val userPhone: TextView =view.findViewById(R.id.txtPhoneNumber)
         userName.text=sharedpreferences.getString("user_name",null)
-        val phoneText="+91-${sharedpreferences.getString("user_mobile_number",null)}"
-        userPhone.text=phoneText
-        navigationView.addHeaderView(convertView)
+        val phone="+91-${sharedpreferences.getString("user_mobile_number",null)}"
+        userPhone.text=phone
+        navigationView.addHeaderView(view)
 
         val actionBarDrawerToggle=ActionBarDrawerToggle(this@Main2_Activity,drawerLayout,
             R.string.open_drawer,
@@ -139,10 +139,10 @@ class Main2_Activity : AppCompatActivity() {
                         finish()
                     }
                     builder.setNeutralButton("Cancel"){dialogInterface,which->
-                        Toast.makeText(applicationContext,"clicked cancel",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext,"Clicked cancel",Toast.LENGTH_SHORT).show()
                     }
                     builder.setNegativeButton("No"){dialogueInterface,which->
-                        Toast.makeText(applicationContext,"clicked No",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext,"Clicked No",Toast.LENGTH_SHORT).show()
                     }
                     val alertDialog:AlertDialog=builder.create()
                     alertDialog.setCancelable(false)
@@ -154,7 +154,7 @@ class Main2_Activity : AppCompatActivity() {
         }
 
     }
-    fun setUpToolbar(){
+    private fun setUpToolbar(){
         setSupportActionBar(toolbar)
         supportActionBar?.title="All Restaurants"
         supportActionBar?.setHomeButtonEnabled(true)
@@ -170,7 +170,7 @@ class Main2_Activity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun openHome(){
+    private fun openHome(){
         supportFragmentManager.beginTransaction()
             .replace(R.id.frameLayout, HomeFragment()).commit()
         supportActionBar?.title="All Restaurants"

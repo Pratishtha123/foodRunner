@@ -72,9 +72,9 @@ class HomeRecyclerAdapter(val context:Context, private val itemList:ArrayList<Re
             .into(holder.imgRestaurantImage)
 
 
-        val listOfFavourites = GetAllFavAsyncTask(context).execute().get()
+        val listOfFav = GetFavAsyncTask(context).execute().get()
 
-        if (listOfFavourites.isNotEmpty() && listOfFavourites.contains(restaurant.restaurantId.toString())) {
+        if (listOfFav.isNotEmpty() && listOfFav.contains(restaurant.restaurantId.toString())) {
 
             holder.imgFav.setBackgroundResource(R.drawable.fav)
         } else {
@@ -91,15 +91,15 @@ class HomeRecyclerAdapter(val context:Context, private val itemList:ArrayList<Re
             )
             if (!DBAsyncTask(context, restaurantEntity, 1).execute().get()) {
                 val async = DBAsyncTask(context, restaurantEntity, 2).execute()
-                val result = async.get()
-                if (result) {
+                val data = async.get()
+                if (data) {
                     holder.imgFav.setBackgroundResource(R.drawable.fav)
                 }
                 } else {
                     val async = DBAsyncTask(context, restaurantEntity, 3).execute()
-                    val result = async.get()
+                    val data = async.get()
 
-                    if (result) {
+                    if (data) {
                         holder.imgFav.setBackgroundResource(R.drawable.fav2)
                     }
                 }
@@ -114,8 +114,21 @@ class HomeRecyclerAdapter(val context:Context, private val itemList:ArrayList<Re
     }
 }
 
+class GetFavAsyncTask(context: Context) : AsyncTask<Void, Void, List<String>>() {
+    val db = Room.databaseBuilder(context, RestaurantDatabase::class.java, "restaurants-db")
+        .build()
 
-        class DBAsyncTask(context: Context, val restaurantEntity: RestaurantEntity, val mode: Int) :
+    override fun doInBackground(vararg params: Void?): List<String> {
+        val list = db.restaurantDao().getAllRestaurants()
+        val listOfIds = arrayListOf<String>()
+        for (i in list) {
+            listOfIds.add(i.id.toString())
+        }
+        return listOfIds
+    }
+}
+
+        class DBAsyncTask(context: Context, private val restaurantEntity: RestaurantEntity, val mode: Int) :
             AsyncTask<Void, Void, Boolean>() {
 
             val db = Room.databaseBuilder(context, RestaurantDatabase::class.java, "restaurants-db")
@@ -147,19 +160,7 @@ class HomeRecyclerAdapter(val context:Context, private val itemList:ArrayList<Re
             }
         }
 
-        class GetAllFavAsyncTask(context: Context) : AsyncTask<Void, Void, List<String>>() {
-            val db = Room.databaseBuilder(context, RestaurantDatabase::class.java, "restaurants-db")
-                .build()
 
-            override fun doInBackground(vararg params: Void?): List<String> {
-                val list = db.restaurantDao().getAllRestaurants()
-                val listOfIds = arrayListOf<String>()
-                for (i in list) {
-                    listOfIds.add(i.id.toString())
-                }
-                return listOfIds
-            }
-        }
 
 
 

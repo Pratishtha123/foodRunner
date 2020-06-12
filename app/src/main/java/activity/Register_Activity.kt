@@ -88,7 +88,7 @@ class Register_Activity : AppCompatActivity() {
                 Toast.makeText(this@Register_Activity, "Weak Password", Toast.LENGTH_LONG).show()
             }
             else {
-                sendRegisterRequest(etName.text.toString(),etMobileNumber2.text.toString(),etAddress.text.toString(),etPassword2.text.toString(),etEmail.text.toString())
+                sendRequest(etName.text.toString(),etMobileNumber2.text.toString(),etAddress.text.toString(),etPassword2.text.toString(),etEmail.text.toString())
 
                 Toast.makeText(this@Register_Activity, "Successfully Registered", Toast.LENGTH_LONG)
                     .show()
@@ -101,7 +101,7 @@ class Register_Activity : AppCompatActivity() {
         super.onPause()
         finish()
     }
-    private fun sendRegisterRequest(name:String,phone:String,address:String,password:String,email:String)
+    private fun sendRequest(name:String,phone:String,address:String,password:String,email:String)
     {
 
         val url="http://13.235.250.119/v2/register/fetch_result"
@@ -121,10 +121,10 @@ class Register_Activity : AppCompatActivity() {
             Response.Listener {
 
                 try {
-                    val data = it.getJSONObject("data")
-                    val success = data.getBoolean("success")
+                    val obj = it.getJSONObject("data")
+                    val success = obj.getBoolean("success")
                     if (success) {
-                        val response = data.getJSONObject("data")
+                        val response = obj.getJSONObject("data")
                         sharedpreferences.edit().putString("user_id", response.getString("user_id"))
                             .apply()
                         sharedpreferences.edit().putString("user_name", response.getString("name"))

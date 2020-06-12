@@ -49,7 +49,8 @@
     <string name="ordering_from">Ordering from :</string>
     <string name="your_order_has_been_successfully_placed">Your Order has been successfully placed!</string>
     <string name="place_order">Place Order</string>
-    <string name="dummy_date">05/11/2012</string>
+    <string name="date">05/11/2012</string>
     <string name="your_previous_orders">Your previous orders are listed below:</string>
     <string name="logout">Logout</string>
+    <string name="no_orders">No Orders</string>
 </resources>

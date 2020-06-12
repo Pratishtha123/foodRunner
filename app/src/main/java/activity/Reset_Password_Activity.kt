@@ -1,7 +1,6 @@
 package activity
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,10 +14,7 @@ import com.android.volley.toolbox.Volley
 import com.pratishtha.foodrunner.R
 import org.json.JSONObject
 import util.ConnectionManager
-import util.Validations
 import java.lang.Exception
-import java.lang.reflect.Method
-import kotlin.math.E
 
 class Reset_Password_Activity : AppCompatActivity() {
 
@@ -49,12 +45,9 @@ class Reset_Password_Activity : AppCompatActivity() {
             rlContent3.visibility = View.GONE
             if (ConnectionManager().checkConnectivity(this@Reset_Password_Activity)) {
                 if (etOTP.text.length == 4) {
-                    if (Validations.validatePasswordLength(etPassword3.text.toString())) {
-                        if (Validations.matchPassword(
-                                etPassword3.text.toString(),
-                                etConfirmPassword3.text.toString()
-                            )
-                        ) {
+                    if (etPassword3.length()>=4) {
+                        if (etPassword3.text.toString()==etConfirmPassword3.text.toString())
+                         {
                             resetPassword(
                                 mobileNumber,
                                 etOTP.text.toString(),
@@ -116,8 +109,8 @@ class Reset_Password_Activity : AppCompatActivity() {
         val jsonObjectRequest =
             object : JsonObjectRequest(Method.POST, url, jsonParams, Response.Listener {
                 try {
-                    val data = it.getJSONObject("data")
-                    val success = data.getBoolean("success")
+                    val obj = it.getJSONObject("data")
+                    val success = obj.getBoolean("success")
                     if (success) {
                         val builder = AlertDialog.Builder(this@Reset_Password_Activity)
                         builder.setTitle("Confirmation")
@@ -130,7 +123,6 @@ class Reset_Password_Activity : AppCompatActivity() {
                                     Main_Activity::class.java
                                 )
                             )
-
                             ActivityCompat.finishAffinity(this@Reset_Password_Activity)
                         }
                         builder.create().show()

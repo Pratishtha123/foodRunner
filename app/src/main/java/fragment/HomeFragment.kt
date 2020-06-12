@@ -24,6 +24,7 @@ import com.pratishtha.foodrunner.R
 import kotlinx.android.synthetic.main.activity_main2_.*
 import model.Restaurant
 import org.json.JSONException
+import org.json.JSONObject
 import util.ConnectionManager
 import java.util.*
 import kotlin.collections.HashMap
@@ -72,7 +73,7 @@ class HomeFragment : Fragment() {
         if(ConnectionManager().checkConnectivity(activity as Context)) {
 
             val jsonObjectRequest =
-                object : JsonObjectRequest(Request.Method.GET, url, null, Response.Listener {
+                object : JsonObjectRequest(Request.Method.GET, url, null, Response.Listener<JSONObject> {
                     try {
                         progressLayout.visibility=View.GONE
                         val obj=it.getJSONObject("data")
@@ -103,7 +104,7 @@ class HomeFragment : Fragment() {
                             ).show()
                         }
                     }catch(e:JSONException){
-                        Toast.makeText(activity as Context,"Some unwanted Exception!!",Toast.LENGTH_SHORT).show()
+                       e.printStackTrace()
                     }
                 }, Response.ErrorListener {
                     Toast.makeText(activity as Context,"Volley error occurred",Toast.LENGTH_SHORT).show()
