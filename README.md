@@ -5,9 +5,13 @@ Food ordering app
 
 ## Features
 
-- add cart and remove item
-
 - sorting restaurants as per there rating
+
+- add to cart and remove item
+
+- place order
+
+- OTP verification in case of Forgot Password
 
 - restaurant menu page
 
