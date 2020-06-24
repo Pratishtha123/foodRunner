@@ -40,6 +40,7 @@ class HomeFragment : Fragment() {
     lateinit var recyclerAdapter: HomeRecyclerAdapter
     lateinit var progressLayout: RelativeLayout
     lateinit var progressBar: ProgressBar
+    private var checkedItem:Int=-1
 
     var ratingComparator= Comparator<Restaurant>{restaurant1,restaurant2->
         if(restaurant1.restaurantRating.compareTo(restaurant2.restaurantRating,true)==0)
@@ -60,7 +61,7 @@ class HomeFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-        recyclerView=view.findViewById(R.id.recyclerView)
+        recyclerView=view.findViewById(R.id.recyclerView)as RecyclerView
         progressLayout=view.findViewById(R.id.progressLayout)
         progressBar=view.findViewById(R.id.progressBar)
 
@@ -91,10 +92,14 @@ class HomeFragment : Fragment() {
                                     restaurantJsonObject.getString("image_url")
                                 )
                                 restaurantInfoList.add(restaurantObject)
-                                recyclerAdapter = HomeRecyclerAdapter(activity as Context,restaurantInfoList)
 
-                                recyclerView.adapter = recyclerAdapter
-                                recyclerView.layoutManager = layoutManager
+                                if (activity != null) {
+                                    recyclerAdapter =
+                                        HomeRecyclerAdapter(activity as Context, restaurantInfoList)
+
+                                    recyclerView.adapter = recyclerAdapter
+                                    recyclerView.layoutManager = layoutManager
+                                }
                             }
                         } else {
                             Toast.makeText(
@@ -121,7 +126,7 @@ class HomeFragment : Fragment() {
         {
             val dialog=AlertDialog.Builder(activity as Context)
             dialog.setTitle("Error")
-            dialog.setMessage("Internet Connection Found")
+            dialog.setMessage("Internet Connection not Found")
             dialog.setPositiveButton("Open Settings"){ text,listener->
                 val settingsIntent=Intent(Settings.ACTION_WIRELESS_SETTINGS)
                 startActivity(settingsIntent)
@@ -139,7 +144,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater?.inflate(R.menu.menu_dashboard,menu)
+        activity?.menuInflater?.inflate(R.menu.menu_dashboard,menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

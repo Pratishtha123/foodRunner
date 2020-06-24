@@ -18,8 +18,6 @@
         <activity android:name="activity.Reset_Password_Activity" />
         <activity android:name="activity.DescriptionActivity" />
         <activity android:name="activity.Main2_Activity" />
-        <activity android:name="activity.Show_Details" />
-        <activity android:name=".Login_Success" />
         <activity android:name="activity.Forgot_Activity" />
         <activity android:name="activity.Register_Activity" />
         <activity android:name="activity.Main_Activity" />

@@ -140,9 +140,11 @@ class Main2_Activity : AppCompatActivity() {
                     }
                     builder.setNeutralButton("Cancel"){dialogInterface,which->
                         Toast.makeText(applicationContext,"Clicked cancel",Toast.LENGTH_SHORT).show()
+                        drawerLayout.closeDrawers()
                     }
                     builder.setNegativeButton("No"){dialogueInterface,which->
                         Toast.makeText(applicationContext,"Clicked No",Toast.LENGTH_SHORT).show()
+                        drawerLayout.closeDrawers()
                     }
                     val alertDialog:AlertDialog=builder.create()
                     alertDialog.setCancelable(false)

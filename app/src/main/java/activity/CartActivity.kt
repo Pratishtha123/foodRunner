@@ -66,9 +66,25 @@ class CartActivity : AppCompatActivity() {
 
         setUpToolbar()
 
-        val bundle = intent.getBundleExtra("data")
-        resId = bundle?.getString("resId", "0")as String
-        resName = bundle.getString("resName", "") as String
+        if (intent != null) {
+            resId = intent.getStringExtra("resId")
+            resName = intent.getStringExtra("resName")as String
+        } else {
+            finish()
+            Toast.makeText(
+                this@CartActivity,
+                "Some unexpected Error occurred!",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        if (resId == "0") {
+            finish()
+            Toast.makeText(
+                this@CartActivity,
+                "Some unexpected Error occurred!",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
 
         cartList()
         placeOrder()

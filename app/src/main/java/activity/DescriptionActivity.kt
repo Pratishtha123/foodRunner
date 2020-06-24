@@ -193,12 +193,12 @@ class DescriptionActivity : AppCompatActivity() {
         val async = CartItems(this@DescriptionActivity, restaurantId.toString(), foodItems, 1).execute()
         val result = async.get()
         if (result) {
-            val data = Bundle()
-            data.putString("resId", restaurantId )
-            data.putString("resName", restaurantName)
-            val intent = Intent(this@DescriptionActivity, CartActivity::class.java)
-            intent.putExtra("data", data)
+
+            val intent=Intent(this@DescriptionActivity,CartActivity::class.java)
+            intent.putExtra("resId", restaurantId )
+            intent.putExtra("resName", restaurantName)
             startActivity(intent)
+
         } else {
             Toast.makeText(this@DescriptionActivity, "Some unexpected error", Toast.LENGTH_SHORT).show()
         }

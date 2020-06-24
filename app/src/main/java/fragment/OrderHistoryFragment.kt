@@ -59,8 +59,8 @@ class OrderHistoryFragment : Fragment() {
 
         val jsonObjectRequest = object :
             JsonObjectRequest(Method.GET, url + userId, null,Response.Listener {
-                progressLayout.visibility = View.GONE
                 try {
+                    progressLayout.visibility = View.GONE
                     val data = it.getJSONObject("data")
                     val success = data.getBoolean("success")
                     if (success) {

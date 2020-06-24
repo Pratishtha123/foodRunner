@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rlNoOrder"
-        android:visibility="gone">
+        android:visibility="invisible">
 
     <ImageView
         android:id="@+id/imgCart"
