@@ -1,5 +1,5 @@
 # FoodRunner
-Food ordering app
+Food ordering app using Kotlin
 
 ---
 
