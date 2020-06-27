@@ -9,10 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
@@ -26,7 +23,7 @@ import database.RestaurantEntity
 import fragment.HomeFragment
 import model.Restaurant
 
-class HomeRecyclerAdapter(val context:Context, private val itemList:ArrayList<Restaurant>) :RecyclerView.Adapter<HomeRecyclerAdapter.HomeViewHolder>() {
+class HomeRecyclerAdapter(val context:Context, private var itemList:ArrayList<Restaurant>) :RecyclerView.Adapter<HomeRecyclerAdapter.HomeViewHolder>() {
 
     class HomeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -59,6 +56,7 @@ class HomeRecyclerAdapter(val context:Context, private val itemList:ArrayList<Re
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val restaurant = itemList[position]
+
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             holder.imgRestaurantImage.clipToOutline = true
         }
@@ -93,6 +91,7 @@ class HomeRecyclerAdapter(val context:Context, private val itemList:ArrayList<Re
                 val async = DBAsyncTask(context, restaurantEntity, 2).execute()
                 val data = async.get()
                 if (data) {
+                    Toast.makeText(context,"Added to favourites", Toast.LENGTH_SHORT).show()
                     holder.imgFav.setBackgroundResource(R.drawable.fav)
                 }
                 } else {
@@ -100,6 +99,7 @@ class HomeRecyclerAdapter(val context:Context, private val itemList:ArrayList<Re
                     val data = async.get()
 
                     if (data) {
+                        Toast.makeText(context,"Removed favourites",Toast.LENGTH_SHORT).show()
                         holder.imgFav.setBackgroundResource(R.drawable.fav2)
                     }
                 }
@@ -112,7 +112,14 @@ class HomeRecyclerAdapter(val context:Context, private val itemList:ArrayList<Re
             context.startActivity(intent)
         }
     }
+
+    fun filterList(filteredList: ArrayList<Restaurant>) {
+        itemList = filteredList
+        notifyDataSetChanged()
+    }
+
 }
+
 
 class GetFavAsyncTask(context: Context) : AsyncTask<Void, Void, List<String>>() {
     val db = Room.databaseBuilder(context, RestaurantDatabase::class.java, "restaurants-db")
