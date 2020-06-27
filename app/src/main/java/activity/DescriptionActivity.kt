@@ -1,6 +1,7 @@
 package activity
 
 import adapter.DescriptionRecyclerAdapter
+import adapter.GetFavAsyncTask
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -82,6 +83,8 @@ class DescriptionActivity : AppCompatActivity() {
         if (intent != null) {
             restaurantId = intent.getStringExtra("restaurant_id")
             restaurantName = intent.getStringExtra("restaurant_name")as String
+
+           
         } else {
             finish()
             Toast.makeText(
@@ -111,6 +114,7 @@ class DescriptionActivity : AppCompatActivity() {
                     val obj2 = it.getJSONObject("data")
                     val success = obj2.getBoolean("success")
                     if (success) {
+                        orderList.clear()
                         val data = obj2.getJSONArray("data")
                         progressLayout.visibility = View.GONE
                         for (i in 0 until data.length()) {
@@ -227,6 +231,27 @@ class DescriptionActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+
+
+        if(orderList.size > 0) {
+
+
+            val alterDialog = androidx.appcompat.app.AlertDialog.Builder(this)
+            alterDialog.setTitle("Alert!")
+            alterDialog.setMessage("Going back will remove everything from cart")
+            alterDialog.setPositiveButton("Okay") { text, listener ->
+                super.onBackPressed()
+            }
+            alterDialog.setNegativeButton("No") { text, listener ->
+
+            }
+            alterDialog.show()
+        }else{
+            super.onBackPressed()
+        }
+
+    }
 
    private fun setUpToolbar(name:String){
        toolbar=findViewById(R.id.toolbar)
