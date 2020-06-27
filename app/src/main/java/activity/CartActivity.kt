@@ -274,6 +274,12 @@ class CartActivity : AppCompatActivity() {
         }
         alterDialog.show()
     }
+
+    override fun onStop() {
+        ClearDBAsync(applicationContext, resId.toString()).execute().get()
+        DescriptionRecyclerAdapter.isCartEmpty=true
+        super.onStop()
+    }
 }
 
 
