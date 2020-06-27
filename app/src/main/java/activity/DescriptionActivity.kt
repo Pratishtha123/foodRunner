@@ -51,7 +51,7 @@ class DescriptionActivity : AppCompatActivity() {
     lateinit var restaurantName: String
     lateinit var sessionManager: SessionManager
 
-    var restaurantId: String? = "100"
+    var restaurantId: String = "100"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +84,14 @@ class DescriptionActivity : AppCompatActivity() {
             restaurantId = intent.getStringExtra("restaurant_id")
             restaurantName = intent.getStringExtra("restaurant_name")as String
 
-           
+            val listOfFav = GetFavAsyncTask(this).execute().get()
+
+            if (listOfFav.isNotEmpty() && listOfFav.contains(restaurantId)) {
+
+                imgFav.setBackgroundResource(R.drawable.fav)
+            } else {
+                imgFav.setBackgroundResource(R.drawable.fav2)
+            }
         } else {
             finish()
             Toast.makeText(
