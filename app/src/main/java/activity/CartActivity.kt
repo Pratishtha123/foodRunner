@@ -255,27 +255,24 @@ class CartActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val clearCart=ClearDBAsync(applicationContext,resId.toString()).execute().get()
-        DescriptionRecyclerAdapter.isCartEmpty=true
         onBackPressed()
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        val id=item.itemId
-
-        when(id){
-            android.R.id.home->{
-                onBackPressed()
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
     override fun onBackPressed() {
-        ClearDBAsync(applicationContext, resId.toString()).execute().get()
-        super.onBackPressed()
+        val alterDialog = androidx.appcompat.app.AlertDialog.Builder(this)
+        alterDialog.setTitle("Alert!")
+        alterDialog.setMessage("Going back will remove everything from cart")
+        alterDialog.setPositiveButton("Okay") { text, listener ->
+            ClearDBAsync(applicationContext, resId.toString()).execute().get()
+            DescriptionRecyclerAdapter.isCartEmpty=true
+            super.onBackPressed()
+        }
+        alterDialog.setNegativeButton("No") { text, listener ->
+
+        }
+        alterDialog.show()
     }
 }
 
