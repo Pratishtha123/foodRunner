@@ -19,7 +19,11 @@ class PlaceOrderActivity : AppCompatActivity() {
         btnOk.setOnClickListener{
             val intent= Intent(this@PlaceOrderActivity,Main2_Activity::class.java)
             startActivity(intent)
+            finishAffinity()
         }
+    }
 
+    override fun onBackPressed() {
+        //forcing user to press Ok.
     }
 }

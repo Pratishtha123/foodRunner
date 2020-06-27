@@ -2,11 +2,12 @@ package activity
 
 import adapter.CartRecyclerAdapter
 import adapter.DescriptionRecyclerAdapter
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.provider.Settings
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,7 @@ import kotlinx.android.synthetic.main.activity_cart.*
 import model.Description
 import org.json.JSONArray
 import org.json.JSONObject
+import util.ConnectionManager
 
 class CartActivity : AppCompatActivity() {
 
@@ -43,8 +45,8 @@ class CartActivity : AppCompatActivity() {
     private lateinit var recyclerAdapter: CartRecyclerAdapter
     lateinit var frameLayout: FrameLayout
     lateinit var btnOrder: Button
-    private  var resId:String?="0"
-    private  var resName:String=""
+    lateinit var resId:String
+    lateinit var resName:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +71,7 @@ class CartActivity : AppCompatActivity() {
         if (intent != null) {
             resId = intent.getStringExtra("resId")
             resName = intent.getStringExtra("resName")as String
+            txtResName.text=resName
         } else {
             finish()
             Toast.makeText(
@@ -152,74 +155,104 @@ class CartActivity : AppCompatActivity() {
         val queue = Volley.newRequestQueue(this@CartActivity)
         val url = "http://13.235.250.119/v2/place_order/fetch_result/"
 
-        val jsonParams = JSONObject()
-        jsonParams.put("user_id", this@CartActivity.getSharedPreferences(getString(R.string.preference_file_name), Context.MODE_PRIVATE).getString(
-            "user_id", null
-        ) as String)
-
-        jsonParams.put("restaurant_id", resId?.toString() as String)
-        var total= 0
-        for (i in 0 until orderList.size) {
-            total+= orderList[i].dishPrice.toInt()
-        }
-        jsonParams.put("total_cost", total.toString())
-        val dishArray = JSONArray()
-        for (i in 0 until orderList.size) {
-            val dish_id = JSONObject()
-            dish_id.put("food_item_id", orderList[i].dishId)
-            dishArray.put(i, dish_id)
-        }
-        jsonParams.put("food", dishArray)
-        val jsonObjectRequest = object : JsonObjectRequest(Method.POST, url, jsonParams, Response.Listener {
+        if (ConnectionManager().checkConnectivity(this)) {
             try {
-                val obj = it.getJSONObject("data")
-                val success = obj.getBoolean("success")
-                if (success) {
-                    val clearCart = ClearDBAsync(applicationContext, resId.toString()).execute().get()
-                    DescriptionRecyclerAdapter.isCartEmpty = true
-                    val dialog = Dialog(
-                        this@CartActivity, android.R.style.Theme_Black_NoTitleBar_Fullscreen
-                    )
-                    dialog.setContentView(R.layout.order_placed_dialog)
-                    dialog.show()
-                    dialog.setCancelable(false)
-                    val btnOk = dialog.findViewById<Button>(R.id.btnOk)
-                    btnOk.setOnClickListener {
-                        dialog.dismiss()
-                        startActivity(Intent(this@CartActivity, Main2_Activity::class.java))
-                        ActivityCompat.finishAffinity(this@CartActivity)
-                    }
-                } else {
-                    rlMyCart.visibility = View.VISIBLE
-                    Toast.makeText(this@CartActivity, "Some Error Occurred", Toast.LENGTH_SHORT).show()
+                progressLayout.visibility = View.GONE
 
+                val jsonParams = JSONObject()
+                jsonParams.put(
+                    "user_id",
+                    this@CartActivity.getSharedPreferences(
+                        getString(R.string.preference_file_name),
+                        Context.MODE_PRIVATE
+                    ).getString(
+                        "user_id", "0"
+                    ) as String
+                )
+
+                jsonParams.put("restaurant_id", resId?.toString() as String)
+                var total = 0
+                for (i in 0 until orderList.size) {
+                    total += orderList[i].dishPrice.toInt()
                 }
+                jsonParams.put("total_cost", total.toString())
+                val dishArray = JSONArray()
+                for (i in 0 until orderList.size) {
+                    val dish_id = JSONObject()
+                    dish_id.put("food_item_id", orderList[i].dishId)
+                    dishArray.put(i, dish_id)
+                }
+                jsonParams.put("food", dishArray)
+                val jsonObjectRequest =
+                    object : JsonObjectRequest(Method.POST, url, jsonParams, Response.Listener {
+
+                        val obj = it.getJSONObject("data")
+                        val success = obj.getBoolean("success")
+                        if (success) {
+                            val clearCart =
+                                ClearDBAsync(applicationContext, resId.toString()).execute().get()
+                            DescriptionRecyclerAdapter.isCartEmpty = true
+                            Toast.makeText(this,"Order Placed",Toast.LENGTH_SHORT).show()
+                            val intent= Intent(this,PlaceOrderActivity::class.java)
+                            startActivity(intent)
+                            finishAffinity()
+                        } else {
+                            rlMyCart.visibility = View.VISIBLE
+                            Toast.makeText(
+                                this@CartActivity,
+                                "Some Error Occurred",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                        }
+                    }, Response.ErrorListener {
+                        rlMyCart.visibility = View.VISIBLE
+                        Toast.makeText(
+                            this@CartActivity,
+                            "Volley Error Occurred",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }) {
+                        override fun getHeaders(): MutableMap<String, String> {
+                            val headers = HashMap<String, String>()
+                            headers["Content-type"] = "application/json"
+                            headers["token"] = "05ed6a9a010009"
+                            return headers
+                        }
+                    }
+                queue.add(jsonObjectRequest)
             } catch (e: Exception) {
                 rlMyCart.visibility = View.VISIBLE
                 e.printStackTrace()
             }
-        }, Response.ErrorListener {
-            rlMyCart.visibility = View.VISIBLE
-            Toast.makeText(this@CartActivity, "Volley Error Occurred", Toast.LENGTH_SHORT).show()
-        }) {
-            override fun getHeaders(): MutableMap<String, String> {
-                val headers = HashMap<String, String>()
-                headers["Content-type"] = "application/json"
-                headers["token"] = "05ed6a9a010009"
-                return headers
+        } else {
+
+            val alterDialog = androidx.appcompat.app.AlertDialog.Builder(this)
+            alterDialog.setTitle("No Internet")
+            alterDialog.setMessage("Internet Connection can't be establish!")
+            alterDialog.setPositiveButton("Open Settings") { text, listener ->
+                val settingsIntent = Intent(Settings.ACTION_SETTINGS)//open wifi settings
+                startActivity(settingsIntent)
             }
+
+            alterDialog.setNegativeButton("Exit") { text, listener ->
+                finishAffinity()//closes all the instances of the app and the app closes completely
+            }
+            alterDialog.setCancelable(false)
+
+            alterDialog.create()
+            alterDialog.show()
         }
-        queue.add(jsonObjectRequest)
     }
 
-class ClearDBAsync(context: Context,val resId:String):AsyncTask<Void,Void,Boolean>(){
-    val db=Room.databaseBuilder(context,RestaurantDatabase::class.java,"restaurants-db").build()
-    override fun doInBackground(vararg params: Void?): Boolean {
-        db.orderDao().deleteOrders(resId)
-        db.close()
-        return true
+    class ClearDBAsync(context: Context,val resId:String):AsyncTask<Void,Void,Boolean>(){
+        val db=Room.databaseBuilder(context,RestaurantDatabase::class.java,"restaurants-db").build()
+        override fun doInBackground(vararg params: Void?): Boolean {
+            db.orderDao().deleteOrders(resId)
+            db.close()
+            return true
+        }
     }
-}
 
     override fun onSupportNavigateUp(): Boolean {
         val clearCart=ClearDBAsync(applicationContext,resId.toString()).execute().get()
@@ -227,4 +260,35 @@ class ClearDBAsync(context: Context,val resId:String):AsyncTask<Void,Void,Boolea
         onBackPressed()
         return true
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        val id=item.itemId
+
+        when(id){
+            android.R.id.home->{
+                onBackPressed()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        ClearDBAsync(applicationContext, resId.toString()).execute().get()
+        super.onBackPressed()
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

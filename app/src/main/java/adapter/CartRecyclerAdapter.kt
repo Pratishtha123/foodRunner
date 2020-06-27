@@ -22,7 +22,7 @@ class CartRecyclerAdapter(private val cartArray:ArrayList<Description>,val conte
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         val view= LayoutInflater.from(parent.context).inflate(R.layout.recycler_cart_single_row,parent,false)
-        return CartRecyclerAdapter.CartViewHolder(view)
+        return CartViewHolder(view)
     }
 
     override fun getItemCount(): Int {

@@ -38,7 +38,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:id="@+id/recyclerView"
-            android:padding="5dp"/>
+            android:padding="10dp"/>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -84,19 +84,19 @@
 
     </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/progressLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#ffffff">
+    <RelativeLayout
+        android:id="@+id/progressLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff">
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
 
-        </RelativeLayout>
 
+    </RelativeLayout>
 
 </RelativeLayout>

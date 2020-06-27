@@ -78,28 +78,6 @@ class HomeFragment : Fragment() {
         layoutManager=LinearLayoutManager(activity)
 
 
-        fun filterFun(strTyped:String){
-            val filteredList= arrayListOf<Restaurant>()
-
-            for (item in restaurantInfoList){
-                if(item.restaurantName.toLowerCase().contains(strTyped.toLowerCase())){
-
-                    filteredList.add(item)
-
-                }
-            }
-
-            if(filteredList.size==0){
-                dashboard_fragment_cant_find_restaurant.visibility=View.VISIBLE
-            }
-            else{
-                dashboard_fragment_cant_find_restaurant.visibility=View.INVISIBLE
-            }
-
-            recyclerAdapter.filterList(filteredList)
-
-        }
-
         editTextSearch.addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(strTyped: Editable?) {
             filterFun(strTyped.toString())
@@ -140,14 +118,11 @@ class HomeFragment : Fragment() {
                                     restaurantJsonObject.getString("image_url")
                                 )
                                 restaurantInfoList.add(restaurantObject)
-
-                                if (activity != null) {
                                     recyclerAdapter =
                                         HomeRecyclerAdapter(activity as Context, restaurantInfoList)
 
                                     recyclerView.adapter = recyclerAdapter
                                     recyclerView.layoutManager = layoutManager
-                                }
                             }
                         } else {
                             Toast.makeText(
@@ -190,6 +165,29 @@ class HomeFragment : Fragment() {
         }
         return view
     }
+
+    fun filterFun(strTyped:String){
+        val filteredList= arrayListOf<Restaurant>()
+
+        for (item in restaurantInfoList){
+            if(item.restaurantName.toLowerCase().contains(strTyped.toLowerCase())){
+
+                filteredList.add(item)
+
+            }
+        }
+
+        if(filteredList.size==0){
+            dashboard_fragment_cant_find_restaurant.visibility=View.VISIBLE
+        }
+        else{
+            dashboard_fragment_cant_find_restaurant.visibility=View.INVISIBLE
+        }
+
+        recyclerAdapter.filterList(filteredList)
+
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         activity?.menuInflater?.inflate(R.menu.menu_dashboard,menu)
