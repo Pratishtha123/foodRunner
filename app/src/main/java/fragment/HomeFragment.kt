@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
     lateinit var recyclerView:RecyclerView
     lateinit var layoutManager:RecyclerView.LayoutManager
 
-    val restaurantInfoList = arrayListOf<Restaurant>()
+    var restaurantInfoList = arrayListOf<Restaurant>()
 
     lateinit var recyclerAdapter: HomeRecyclerAdapter
     lateinit var progressLayout: RelativeLayout
