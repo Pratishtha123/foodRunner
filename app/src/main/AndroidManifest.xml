@@ -12,16 +12,43 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/food_app_icon_round"
         android:supportsRtl="true"
+        android:resizeableActivity="false"
         android:theme="@style/AppTheme">
-        <activity android:name="activity.PlaceOrderActivity"></activity>
-        <activity android:name="activity.CartActivity" />
-        <activity android:name="activity.Reset_Password_Activity" />
-        <activity android:name="activity.DescriptionActivity" />
-        <activity android:name="activity.Main2_Activity" />
-        <activity android:name="activity.Forgot_Activity" />
-        <activity android:name="activity.Register_Activity" />
-        <activity android:name="activity.Main_Activity" />
-        <activity android:name="activity.Splash_Activity">
+        <activity android:name="activity.PlaceOrderActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize">
+        </activity>
+        <activity android:name="activity.CartActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize">
+        </activity>
+        <activity android:name="activity.Reset_Password_Activity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize">
+        </activity>
+        <activity android:name="activity.DescriptionActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize">
+        </activity>
+        <activity android:name="activity.Main2_Activity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize">
+        </activity>
+        <activity android:name="activity.Forgot_Activity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize">
+        </activity>
+        <activity android:name="activity.Register_Activity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize">
+        </activity>
+        <activity android:name="activity.Main_Activity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize">
+        </activity>
+        <activity android:name="activity.Splash_Activity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -2,6 +2,7 @@ package activity
 
 import adapter.CartRecyclerAdapter
 import adapter.DescriptionRecyclerAdapter
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
@@ -30,6 +31,7 @@ import model.Description
 import org.json.JSONArray
 import org.json.JSONObject
 import util.ConnectionManager
+import util.SessionManager
 
 class CartActivity : AppCompatActivity() {
 
@@ -52,6 +54,8 @@ class CartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
+        var sessionManager = SessionManager(this@CartActivity)
+        var sharedPreferences = getSharedPreferences(sessionManager.PREF_NAME, Context.MODE_PRIVATE)
         recyclerView = findViewById(R.id.recyclerView)
         layoutManager = LinearLayoutManager(this@CartActivity)
         coordinateLayout = findViewById(R.id.coordinateLayout)
@@ -135,7 +139,6 @@ class CartActivity : AppCompatActivity() {
         btnOrder.text = total
         btnOrder.setOnClickListener {
             progressLayout.visibility = View.VISIBLE
-            rlMyCart.visibility = View.INVISIBLE
             sendRequest()
         }
     }
@@ -189,10 +192,9 @@ class CartActivity : AppCompatActivity() {
                         val obj = it.getJSONObject("data")
                         val success = obj.getBoolean("success")
                         if (success) {
-                            val clearCart =
                                 ClearDBAsync(applicationContext, resId.toString()).execute().get()
                             DescriptionRecyclerAdapter.isCartEmpty = true
-                            Toast.makeText(this,"Order Placed",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@CartActivity,"Order Placed",Toast.LENGTH_SHORT).show()
                             val intent= Intent(this,PlaceOrderActivity::class.java)
                             startActivity(intent)
                             finishAffinity()
